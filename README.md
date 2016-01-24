@@ -3,7 +3,7 @@
 Yleisiä linkkejä:
 
 * [linkki sovellukseeni](https://pjalkane.users.cs.helsinki.fi/aanestys)
-* [linkki dokumentaatiooni](https://github.com/pinjaliina/aanestys/tree/master/doc)
+* [linkki dokumentaatiooni](https://github.com/pinjaliina/aanestys/tree/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
