@@ -2,9 +2,9 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [linkki sovellukseeni](https://pjalkane.users.cs.helsinki.fi/aanestys)
+* [linkki dokumentaatiooni](https://github.com/pinjaliina/aanestys/tree/master/doc)
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+Valitsemani aihe on [Äänestys](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Aanestys.html).
