@@ -1,1 +1,6 @@
+# Netbeans private directory.
+/nbproject/private/
+# Try to avoid accidential commits of LibreOffice .~lock files.
+doc/.~lock.dokumentaatio.odt#
+# Never commit OS X's Finder folder attribute storage files!
 .DS_Store
