@@ -14,3 +14,9 @@ Valitsemani aihe on [Äänestys](http://advancedkittenry.github.io/suunnittelu_j
  * [listasivun demo](http://pjalkane.users.cs.helsinki.fi/aanestys/poll_list)
  * [muokkaus/esittelysivun demo](http://pjalkane.users.cs.helsinki.fi/aanestys/poll_manage_options)
 
+* [Bootstrapin (käytetty HTML/CSS/Javascript-kehys) CSS-dokumentaatio.](http://getbootstrap.com/css/) Joitakin alakohtia:
+ * [typografia](http://getbootstrap.com/css/#type)
+ * [taulukot](http://getbootstrap.com/css/#tables)
+ * [lomakkeet](http://getbootstrap.com/css/#forms)
+ * [painikkeet](http://getbootstrap.com/css/#buttons)
+
