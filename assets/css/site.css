@@ -8,3 +8,65 @@
   max-width: 1200px;
   margin: 0px auto;
 }
+
+.box_basic{
+	background-color: #ebf4fb;
+	border: 2px solid #b7ddf2;
+	padding: 10px;
+}
+
+.box_basic table {
+	border: 1px solid #b7ddf2;
+}
+
+.box_basic thead{
+	border-bottom: 1px solid #b7ddf2;
+	font-size: 120%;
+}
+
+.box_basic td, .box_basic th{
+	padding: 3px 10px 3px 10px;
+}
+
+.box_basic tr.odd{
+	background-color: #ddeeff;
+}
+
+.box_basic tr.even{
+	background-color: #eeeeff;
+}
+
+.box_basic td.row_title{
+	font-weight: bold;
+}
+
+#login_form > label{
+	width: 100px;
+}
+
+#poll_edit > label{
+	width: 220px;
+}
+
+#poll_edit > textarea{
+	margin: 10px 0 2px 1px;
+}
+
+#login_submit{
+	margin: 10px 3px 3px 103px;
+}
+
+#poll_edit_add_option, #poll_edit_submit{
+	margin: 10px 3px 3px 223px;
+}
+
+#login_container, #poll_admin_list{
+	display: block;
+	min-width: 300px;
+	width: 50%;
+}
+
+div.ctrl_btns {
+	margin: 15px 0 15px 0;
+}
+

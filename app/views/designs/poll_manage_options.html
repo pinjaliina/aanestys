@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>Äänestyksen tiedot</h1>
+
+	<div class="box_basic" id="poll_admin_edit">
+		<form action="" id="poll_edit">
+			<label for="poll_edit_name">Äänestyksen nimi:</label>
+			<input type="text" id="poll_edit_name" maxlength="30" /><br/>
+			<label for="poll_edit_description">Äänestyksen kuvaus:</label>
+			<textarea id="poll_edit_description" cols="80" maxlength="1000"></textarea><br/>
+			<label for="poll_edit_start">Äänestys alkaa (pp.kk.vvvv):</label>
+			<input type="date" id="poll_edit_start" /><br/>
+			<label for="poll_edit_end">Äänestys päättyy (pp.kk.vvvv):</label>
+			<input type="date" id="poll_edit_end" /><br/>
+			<label for="poll_edit_option1_name">Vaihtoehdon 1 nimi:</label>
+			<input type="text" id="poll_edit_option1_name" maxlength="40" /><br/>
+			<label for="poll_edit_option1_description">Vaihtoehdon 1 kuvaus:</label>
+			<textarea id="poll_edit_option1_description" cols="80" maxlength="200" /></textarea><br/>
+			<label for="poll_edit_option1_name">Vaihtoehdon 2 nimi:</label>
+			<input type="text" id="poll_edit_option2_name" maxlength="40" /><br/>
+			<label for="poll_edit_option2_description">Vaihtoehdon 2 kuvaus:</label>
+			<textarea id="poll_edit_option2_description" cols="80" maxlength="200" /></textarea><br/>
+			<input type="button" id="poll_edit_add_option" value="Lisää äänestykseen uusi vaihtoehto" /><br/>
+			<input type="submit" id="poll_edit_submit" value="Tallenna äänestys" />
+		</form>
+	</div>
+
+{% endblock %}

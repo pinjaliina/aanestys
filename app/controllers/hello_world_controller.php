@@ -13,4 +13,19 @@
       //echo 'Hello World!';
 			View::make('helloworld.html');
     }
-  }
+		
+		public static function login(){
+			// Login page
+			View::make('designs/login.html');
+		}
+		
+		public static function poll_list(){
+			// List polls (and a list demo page)
+			View::make('designs/poll_list.html');
+		}
+
+		public static function poll_manage_options(){
+			// Manage a poll (and a show/edit demo page)
+			View::make('designs/poll_manage_options.html');
+		}
+}

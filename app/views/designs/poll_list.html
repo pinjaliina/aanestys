@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>Hallinnoi äänestyksiä</h1>
+
+	<div class="ctrl_btns">
+		<button class="btn btn-default">Lisää uusi</button>
+	</div>
+	
+	<div class="box_basic" id="poll_admin_list">
+		<table>
+			<thead>
+				<tr class="odd">
+					<th colspan="5">Äänestys</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="even">
+					<td class="row_title">Suosikkilemmikki</td>
+					<td><a href="">Tulokset</a></td>
+					<td><a href="">Äänioikeutetut</a></td>
+					<td><a href="">Muuta</a></td>
+					<td><a href="">Poista</a></td>
+				</tr>
+				<tr class="odd">
+					<td class="row_title">Vuoden opettaja</td>
+					<td><a href="">Tulokset</a></td>
+					<td><a href="">Äänioikeutetut</a></td>
+					<td><a href="">Muuta</a></td>
+					<td><a href="">Poista</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}
