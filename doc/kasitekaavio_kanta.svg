@@ -517,7 +517,7 @@
       <path stroke-linecap="butt" transform="matrix(1,0,0,1,-207,-143)" clip-path="url(#clipPath2)" fill="none" image-rendering="auto" d="M215 151 L295 151 L295 191 L215 191 Z" stroke-miterlimit="1.45"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-200,-136)" stroke-linecap="butt">
-      <text x="239.3613" xml:space="preserve" y="175.5352" clip-path="url(#clipPath2)" stroke="none">users</text>
+      <text x="232.1045" xml:space="preserve" y="175.5352" clip-path="url(#clipPath2)" stroke="none">käyttäjä</text>
     </g>
     <g text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,338,7)" image-rendering="optimizeQuality">
       <image x="0" y="0" clip-path="url(#clipPath4)" width="101" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAAA9CAYAAAC0oadVAAAB5UlEQVR42u2cyU4C&#10;QRRFyxZFUEExAQdw4ZA44sYJxyjO/v//eCvcTogLurV7weLc5Gyrknf6Pdi8CoEQ&#10;QgghhExfZkxiZiE3ac3SGpYmJB4+J+ZFVSxALqom1q3iOs6UJSQeXBfLYkWsQi5i&#10;rZquW91yColJhcSDlsSaWBddsQ256Ikt160lFl3PpIiUig23LGNPHIk+5OJEHLpu&#10;W+6emj/2fyWx1WWb3hdn4krcijvIZCAuLGhXtD11KkWkVD0Tu+6QS/EoXsQrZPIs&#10;7i0mdsymaPhPUyEpK56Pp+LGQj7FF2TybjEDj7KuP/LSpPQ9tl594Tdk8iGG/piR&#10;ghRAClKQghSkIAUpSEEKUgApSEEKUpCCFKQgBSlIAaQgBSlIQQpSkIIUpCAFkIIU&#10;pCAFKUhBClKQghRAClKQMlVS4pZr3OQa+JJ3XwiTeRNP4loch9EyailSmj4s7uzF&#10;3b2HMFoZG0ImUUhcSD0XB2IjlLDzmG4Hd8Jo7bhvMQO3JEzm2kLilNkJJWwHp3v0&#10;ce+75W7Zdcec+CKYzLE7JNYtbgYX3qMff3Fi0WI6ltODXHQto20hhV+c+C2m5tZr&#10;+HcG8tFw3WqhhLdZxsUkHmXpS0bwN+ZcvySU+LxUKgeKQQghhBBCpi4/RTHL3F/I&#10;ApYAAAAASUVORK5CYII=" height="61" preserveAspectRatio="none"/>
@@ -525,7 +525,7 @@
       <path stroke-linecap="butt" transform="matrix(1,0,0,1,-538,-143)" clip-path="url(#clipPath2)" fill="none" image-rendering="auto" d="M546 151 L626 151 L626 191 L546 191 Z" stroke-miterlimit="1.45"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-200,-136)" stroke-linecap="butt">
-      <text x="572.0107" xml:space="preserve" y="175.5352" clip-path="url(#clipPath2)" stroke="none">polls</text>
+      <text x="560.8105" xml:space="preserve" y="175.5352" clip-path="url(#clipPath2)" stroke="none">äänestys</text>
     </g>
     <g text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,7,232)" image-rendering="optimizeQuality">
       <image x="0" y="0" clip-path="url(#clipPath5)" width="101" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAAA9CAYAAAC0oadVAAAB5UlEQVR42u2cyU4C&#10;QRRFyxZFUEExAQdw4ZA44sYJxyjO/v//eCvcTogLurV7weLc5Gyrknf6Pdi8CoEQ&#10;QgghhExfZkxiZiE3ac3SGpYmJB4+J+ZFVSxALqom1q3iOs6UJSQeXBfLYkWsQi5i&#10;rZquW91yColJhcSDlsSaWBddsQ256Ikt160lFl3PpIiUig23LGNPHIk+5OJEHLpu&#10;W+6emj/2fyWx1WWb3hdn4krcijvIZCAuLGhXtD11KkWkVD0Tu+6QS/EoXsQrZPIs&#10;7i0mdsymaPhPUyEpK56Pp+LGQj7FF2TybjEDj7KuP/LSpPQ9tl594Tdk8iGG/piR&#10;ghRAClKQghSkIAUpSEEKUgApSEEKUpCCFKQgBSlIAaQgBSlIQQpSkIIUpCAFkIIU&#10;pCAFKUhBClKQghRAClKQMlVS4pZr3OQa+JJ3XwiTeRNP4loch9EyailSmj4s7uzF&#10;3b2HMFoZG0ImUUhcSD0XB2IjlLDzmG4Hd8Jo7bhvMQO3JEzm2kLilNkJJWwHp3v0&#10;ce+75W7Zdcec+CKYzLE7JNYtbgYX3qMff3Fi0WI6ltODXHQto20hhV+c+C2m5tZr&#10;+HcG8tFw3WqhhLdZxsUkHmXpS0bwN+ZcvySU+LxUKgeKQQghhBBCpi4/RTHL3F/I&#10;ApYAAAAASUVORK5CYII=" height="61" preserveAspectRatio="none"/>
@@ -533,7 +533,8 @@
       <path stroke-linecap="butt" transform="matrix(1,0,0,1,-207,-368)" clip-path="url(#clipPath2)" fill="none" image-rendering="auto" d="M215 376 L295 376 L295 416 L215 416 Z" stroke-miterlimit="1.45"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-200,-136)" stroke-linecap="butt">
-      <text x="219.1611" xml:space="preserve" y="400.5352" clip-path="url(#clipPath2)" stroke="none">poll_options</text>
+      <text x="219.2373" xml:space="preserve" y="393.4688" clip-path="url(#clipPath2)" stroke="none">äänestyksen</text>
+      <text x="224.1973" xml:space="preserve" y="407.6016" clip-path="url(#clipPath2)" stroke="none">vaihtoehto</text>
     </g>
     <g text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,338,232)" image-rendering="optimizeQuality">
       <image x="0" y="0" clip-path="url(#clipPath6)" width="101" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAAA9CAYAAAC0oadVAAAB5UlEQVR42u2cyU4C&#10;QRRFyxZFUEExAQdw4ZA44sYJxyjO/v//eCvcTogLurV7weLc5Gyrknf6Pdi8CoEQ&#10;QgghhExfZkxiZiE3ac3SGpYmJB4+J+ZFVSxALqom1q3iOs6UJSQeXBfLYkWsQi5i&#10;rZquW91yColJhcSDlsSaWBddsQ256Ikt160lFl3PpIiUig23LGNPHIk+5OJEHLpu&#10;W+6emj/2fyWx1WWb3hdn4krcijvIZCAuLGhXtD11KkWkVD0Tu+6QS/EoXsQrZPIs&#10;7i0mdsymaPhPUyEpK56Pp+LGQj7FF2TybjEDj7KuP/LSpPQ9tl594Tdk8iGG/piR&#10;ghRAClKQghSkIAUpSEEKUgApSEEKUpCCFKQgBSlIAaQgBSlIQQpSkIIUpCAFkIIU&#10;pCAFKUhBClKQghRAClKQMlVS4pZr3OQa+JJ3XwiTeRNP4loch9EyailSmj4s7uzF&#10;3b2HMFoZG0ImUUhcSD0XB2IjlLDzmG4Hd8Jo7bhvMQO3JEzm2kLilNkJJWwHp3v0&#10;ce+75W7Zdcec+CKYzLE7JNYtbgYX3qMff3Fi0WI6ltODXHQto20hhV+c+C2m5tZr&#10;+HcG8tFw3WqhhLdZxsUkHmXpS0bwN+ZcvySU+LxUKgeKQQghhBBCpi4/RTHL3F/I&#10;ApYAAAAASUVORK5CYII=" height="61" preserveAspectRatio="none"/>
@@ -541,7 +542,7 @@
       <path stroke-linecap="butt" transform="matrix(1,0,0,1,-538,-368)" clip-path="url(#clipPath2)" fill="none" image-rendering="auto" d="M546 376 L626 376 L626 416 L546 416 Z" stroke-miterlimit="1.45"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-200,-136)" stroke-linecap="butt">
-      <text x="570.5635" xml:space="preserve" y="400.5352" clip-path="url(#clipPath2)" stroke="none">votes</text>
+      <text x="549.7012" xml:space="preserve" y="400.5352" clip-path="url(#clipPath2)" stroke="none">annettu ääni</text>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" font-family="sans-serif" transform="matrix(1,0,0,1,-200,-136)" stroke-linecap="butt">
       <text x="527.7207" xml:space="preserve" y="411.4688" clip-path="url(#clipPath2)" stroke="none">∞</text>
