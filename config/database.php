@@ -18,6 +18,9 @@
       )
     );
 
+    // Määritä tietokantataulujen nimen etuliite
+    const PREFIX = 'a_';
+
     public static function connection_config(){
       $config = array(
         'db' => self::$use_database,

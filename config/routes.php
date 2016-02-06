@@ -3,6 +3,14 @@
   $routes->get('/', function() {
     HelloWorldController::index();
   });
+	
+	$routes->get('/user', function() {
+		UserController::index();
+	});
+
+	$routes->get('/user:id', function($id) {
+		UserController::index($id);
+	});
 
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
