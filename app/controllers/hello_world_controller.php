@@ -24,8 +24,13 @@
 			View::make('designs/poll_list.html');
 		}
 
-		public static function poll_manage_options(){
-			// Manage a poll (and a show/edit demo page)
-			View::make('designs/poll_manage_options.html');
+		public static function poll_show(){
+			// View a single poll (and an show demo page)
+			View::make('designs/poll_show.html');
+		}
+		
+		public static function poll_edit(){
+			// Manage a poll (and an edit demo page)
+			View::make('designs/poll_edit.html');
 		}
 }

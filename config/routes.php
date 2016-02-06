@@ -16,6 +16,10 @@
 		HelloWorldController::poll_list();
 	});
 
-	$routes->get('/poll_manage_options', function() {
-		HelloWorldController::poll_manage_options();
+	$routes->get('/poll_show', function() {
+		HelloWorldController::poll_show();
+	});
+	
+	$routes->get('/poll_edit', function() {
+		HelloWorldController::poll_edit();
 	});
