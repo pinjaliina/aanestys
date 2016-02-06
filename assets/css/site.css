@@ -10,6 +10,9 @@
 }
 
 .box_basic{
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
 	background-color: #ebf4fb;
 	border: 2px solid #b7ddf2;
 	padding: 10px;
@@ -36,7 +39,7 @@
 	background-color: #eeeeff;
 }
 
-.box_basic td.row_title{
+.box_basic td.row_title, .box_basic td.action{
 	font-weight: bold;
 }
 
@@ -58,12 +61,6 @@
 
 #poll_edit_add_option, #poll_edit_submit{
 	margin: 10px 3px 3px 223px;
-}
-
-#login_container, #poll_admin_list{
-	display: block;
-	min-width: 300px;
-	width: 50%;
 }
 
 div.ctrl_btns {
