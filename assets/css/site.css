@@ -28,11 +28,11 @@
 	padding: 3px 10px 3px 10px;
 }
 
-.box_basic tr.odd{
+.box_basic tr{
 	background-color: #ddeeff;
 }
 
-.box_basic tr.even{
+.box_basic .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
 	background-color: #eeeeff;
 }
 
