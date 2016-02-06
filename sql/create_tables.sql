@@ -11,7 +11,9 @@ CREATE TABLE a_users(
 CREATE TABLE a_polls(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR(50) NOT NULL UNIQUE,
-	description TEXT
+	description TEXT,
+	start_time TIMESTAMP WITH TIME ZONE NOT NULL,
+	end_time TIMESTAMP WITH TIME ZONE NOT NULL
 );
 
 CREATE TABLE a_poll_options(
