@@ -10,9 +10,7 @@
 }
 
 .box_basic{
-	display: -webkit-box;
-	display: -moz-box;
-	display: box;
+	display: inline-block;
 	background-color: #ebf4fb;
 	border: 2px solid #b7ddf2;
 	padding: 10px;
