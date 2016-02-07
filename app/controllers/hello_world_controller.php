@@ -5,7 +5,7 @@
     public static function index(){
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
    	  //View::make('home.html');
-			echo 'Tämä on etusivu!';
+			echo 'Koodi on työn alla. Kts. <a href="/aanestys/hiekkalaatikko">hiekkalaatikko</a>.';
     }
 
     public static function sandbox(){

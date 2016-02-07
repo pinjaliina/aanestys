@@ -9,6 +9,9 @@ Yleisiä linkkejä:
 
 Valitsemani aihe on [Äänestys](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Aanestys.html).
 
+* Tähän asti tehtyä (7.2.2016):
+ * [Käyttäjänhallinta](http://pjalkane.users.cs.helsinki.fi/aanestys/user). Koko ns. CRUD-nelikko periaatteessa toimii, mutta mitään käyttöoikeuksien tarkistusta tai syötteiden validointia ei vielä ole toteutettu.
+
 * Demosivuja:
  * [kirjautumissivun demo](http://pjalkane.users.cs.helsinki.fi/aanestys/login)
  * [listasivun demo](http://pjalkane.users.cs.helsinki.fi/aanestys/poll_list)
