@@ -8,8 +8,28 @@
 		UserController::index();
 	});
 
-	$routes->get('/user:id', function($id) {
-		UserController::index($id);
+	$routes->get('/user/new', function() {
+		UserController::create();
+	});
+
+	$routes->post('/user/save', function() {
+		UserController::save();
+	});
+
+	$routes->post('/user/update', function() {
+		UserController::update();
+	});
+
+	$routes->get('/user/:id', function($id) {
+		UserController::show($id);
+	});
+
+	$routes->get('/user/:id/edit', function($id) {
+		UserController::edit($id);
+	});
+	
+	$routes->get('/user/:id/delete', function($id){
+		UserController::delete($id);
 	});
 
   $routes->get('/hiekkalaatikko', function() {

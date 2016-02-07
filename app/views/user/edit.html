@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+	{# NOTE: ordinary users should be able to edit only these fields:
+		 password, name, email, and only for their own account. They shouldn't
+		 be able to add new users.
+	#}
+
+	{% if user %}
+		<h1>Käyttäjän tiedot</h1>
+	{% else %}
+		<h1>Lisää uusi käyttäjä</h1>
+	{% endif %}
+	
+	<div class="box_basic" id="user_edit">
+		<form method="post" action="{% if user %}{{base_path}}/user/update{% else %}{{base_path}}/user/save{% endif %}" id="user_edit_form">
+			{% if user %}
+				<input type="hidden" name="id" value="{{user.id}}" />
+			{% endif %}
+			<label for="user_edit_login">Käyttäjätunnus:</label>
+			<input type="text" id="user_edit_login" name="login" maxlength="15" value="{% if user %}{{user.login}}{% endif %}" /><br/>
+			<label for="user_edit_password">Salasana:</label>
+			<input type="password" id="user_edit_password" name="password" maxlength="20" value="{% if user %}{{user.password}}{% endif %}" /><br/>
+			<label for="user_edit_confirm">Vahvista salasana:</label>
+			<input type="password" id="user_edit_confirm" name="confirm" maxlength="20" value="{% if user %}{{user.password}}{% endif %}" /><br/>
+			<label for="user_edit_admin">Ylläpito-oikeus:</label>
+			<input type="checkbox" id="user_edit_admin" name="admin" {% if user and user.admin %}checked="checked"{% endif %} /><br/>
+			<label for="user_edit_name">Koko nimi:</label>
+			<input type="text" id="user_edit_name" name="name" maxlength="40" value="{% if user %}{{user.name}}{% endif %}" /><br/>
+			<label for="user_edit_email">Sähköpostiosoite:</label>
+			<input type="text" id="user_edit_email" name="email" maxlength="40" value="{% if user %}{{user.email}}{% endif %}" /><br/>
+			<input type="submit" id="user_edit_submit" name="submit" value="{% if user %}Tallenna muutokset{% else %}Lisää käyttäjä{% endif %}" />
+		</form>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>Käyttäjän tiedot</h1>
+
+	<div class="box_basic" id="user_show">
+		<table class="table-striped">
+			<tr>
+				<td class="row_title">Käyttäjätunnus</td>
+				<td>{{user.login}}</td>
+			</tr>
+			<tr>
+				<td class="row_title">Ylläpito-oikeus</td>
+				{% if user.admin %}
+					<td>On</td>
+				{% else %}
+					<td>Ei</td>
+				{% endif %}
+			</tr>
+			<tr>
+				<td class="row_title">Koko nimi</td>
+				<td>{{user.name}}</td>
+			</tr>
+			<tr>
+				<td class="row_title">Sähköpostiosoite</td>
+				<td>{{user.email}}</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="ctrl_btns">
+		<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/edit">Muokkaa tietoja</a>
+		<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/delete">Poista käyttäjä</a>
+	</div>
+
+{% endblock %}
