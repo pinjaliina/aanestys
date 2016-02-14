@@ -98,4 +98,23 @@
 			Redirect::to('/user', array('message' => 'Käyttäjä poistettiin onnistuneesti.'));
 		}
 		
+		public static function login(){
+      View::make('user/login.html');
+		}
+
+		public static function process_login(){
+			$p = $_POST;
+
+			$user = User::authenticate($p['username'], $p['password']);
+
+			if(!$user){
+				View::make('user/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'username' => $p['username']));
+			}
+			else{
+				$_SESSION['user'] = $user->id;
+
+				Redirect::to('/', array('message' => 'Tervetuloa takaisin, ' . $user->name . '!'));
+			}
+		}	
+		
 	}

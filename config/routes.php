@@ -4,6 +4,10 @@
     PollController::index();
   });
 	
+	$routes->get('/login', function() {
+		UserController::login();
+	});
+	
 	$routes->get('/user', function() {
 		UserController::index();
 	});
@@ -12,6 +16,10 @@
 		UserController::create();
 	});
 
+	$routes->post('/login', function() {
+		UserController::process_login();
+	});
+	
 	$routes->post('/user/save', function() {
 		UserController::save();
 	});
@@ -71,10 +79,6 @@
     HelloWorldController::sandbox();
   });
 	
-	$routes->get('/login', function() {
-		HelloWorldController::login();
-	});
-
 	$routes->get('/poll_list', function() {
 		HelloWorldController::poll_list();
 	});

@@ -3,6 +3,12 @@
 
 	<h1>Hallinnoi äänestyksiä</h1>
 
+	{% if message %}
+		<div class="alert alert-success">
+		{{message}}
+		</div>
+	{% endif %}
+	
 	<div class="ctrl_btns">
 		<a class="btn btn-default" href="{{base_path}}/poll/new">Lisää uusi</a>
 	</div>

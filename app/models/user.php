@@ -15,6 +15,9 @@
 		}
 		
 		public function validate_login(){
+			// FIXME: We should check whether the login name already exists and add
+			// an error if it does to avoid the much uglier "violation of unique
+			// constraint" SQL error.
 			$errors = array();
 			$nameErr = $this->validateStrLen($this->login, 15, 3, 'Käyttäjätunnuksen');
 			if(isset($nameErr)){
@@ -57,6 +60,15 @@
 			return DatabaseConfig::PREFIX .'users';
 		}
 		
+		public static function authenticate($login, $password){
+			$user = self::findByLoginName($login);
+			if($user) {
+				if($password == $user->password) {
+					return $user;
+				}
+			}
+		}
+
 		public static function findAll(){
 			$q = DB::connection()->prepare('SELECT * FROM '. self::tbl());
 			$q->execute();
@@ -93,8 +105,28 @@
 				));
 			}
 			
-			return $user;
+			return $user;			
+		}
+		
+		public static function findByLoginName($login){
+			$q = DB::connection()->prepare('SELECT * FROM '. self::tbl() .' WHERE login = :login');
+			$q->execute(array('login' => $login));
+			$r = $q->fetch();
 			
+			if($r) {
+				$user = new User(array(
+						'id' => $r['id'],
+						'login' => $r['login'],
+						'password' => $r['password'],
+						'admin' => $r['admin'],
+						'name' => $r['name'],
+						'email' => $r['email']
+				));
+			}
+			
+			if(isset($user)) {
+				return $user;
+			}
 		}
 		
 		public function save(){

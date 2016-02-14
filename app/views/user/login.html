@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>Kirjaudu sisään</h1>
+
+	{% if error %}
+    <div class="alert alert-danger">
+      <ul>
+				<li>{{error}}</li>
+      </ul>
+    </div>
+  {% endif %}
+	
+	<div class="box_basic" id="login_container">
+		<form method="post" action="{{base_path}}/login" id="login_form">
+			<label for="login_username">Käyttäjänimi:</label>
+			<input type="text" id="login_username" name="username" maxlength="15" value="{% if error and error.username %}{{error.username}}{% endif %}" /><br/>
+			<label for="login_password">Salasana:</label>
+			<input type="password" id="login_password" name="password" maxlength="20" /><br/>
+			<input type="submit" id="login_submit" name="submit" value="Kirjaudu sisään" />
+		</form>
+	</div>
+
+{% endblock %}
