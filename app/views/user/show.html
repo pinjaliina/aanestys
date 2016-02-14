@@ -3,6 +3,12 @@
 
 	<h1>Käyttäjän tiedot</h1>
 
+	{% if message %}
+		<div class="alert alert-success">
+		{{message}}
+		</div>
+	{% endif %}
+	
 	<div class="box_basic" id="user_show">
 		<table class="table-striped">
 			<tr>

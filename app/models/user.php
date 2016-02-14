@@ -11,6 +11,46 @@
 		//Constructor
 		public function __construct($attributes){
 			parent::__construct($attributes);
+			$this->validators = array('validate_login', 'validate_password', 'validate_name', 'validate_email');
+		}
+		
+		public function validate_login(){
+			$errors = array();
+			$nameErr = $this->validateStrLen($this->login, 15, 3, 'Käyttäjätunnuksen');
+			if(isset($nameErr)){
+				$errors[] = $nameErr;
+			}
+			return $errors;
+		}
+
+		public function validate_password(){
+			$errors = array();
+			$nameErr = $this->validateStrLen($this->password, 20, 6, 'Salasanan');
+			if(isset($nameErr)){
+				$errors[] = $nameErr;
+			}
+			return $errors;
+		}
+		
+		public function validate_name(){
+			$errors = array();
+			$nameErr = $this->validateStrLen($this->name, 40, 5, 'Koko nimen');
+			if(isset($nameErr)){
+				$errors[] = $nameErr;
+			}
+			return $errors;
+		}
+		
+		public function validate_email(){
+			// FIXME: we could do some smart email address validation besides just
+			// checking for its length. But I'm in too much hurry to write that regex
+			// right now.
+			$errors = array();
+			$nameErr = $this->validateStrLen($this->email, 40, 5, 'Sähköpostiosoitteen');
+			if(isset($nameErr)){
+				$errors[] = $nameErr;
+			}
+			return $errors;
 		}
 		
 		private static function tbl() {
@@ -67,8 +107,14 @@
 		}
 		
 		public function update(){
-			$q = DB::connection()->prepare('UPDATE '. self::tbl() .' SET (login, password, admin, name, email)=(:login, :password, :admin, :name, :email) WHERE id = :id');
-			$q->execute(array($this->login, $this->password, $this->admin, $this->name, $this->email, $this->id));
+			if(isset($this->password) && strlen($this->password) != 0) {
+				$q = DB::connection()->prepare('UPDATE '. self::tbl() .' SET (login, password, admin, name, email)=(:login, :password, :admin, :name, :email) WHERE id = :id');
+				$q->execute(array($this->login, $this->password, $this->admin, $this->name, $this->email, $this->id));
+			}
+			else { // Don't update password if it is zero-length.
+				$q = DB::connection()->prepare('UPDATE '. self::tbl() .' SET (login, admin, name, email)=(:login, :admin, :name, :email) WHERE id = :id');
+				$q->execute(array($this->login, $this->admin, $this->name, $this->email, $this->id));			
+			}
 		}
 		
 		public function delete(){

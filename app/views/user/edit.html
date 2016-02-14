@@ -6,14 +6,24 @@
 		 be able to add new users.
 	#}
 
-	{% if user %}
+	{% if user and user.id %}
 		<h1>Käyttäjän tiedot</h1>
 	{% else %}
 		<h1>Lisää uusi käyttäjä</h1>
 	{% endif %}
+
+	{% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 	
 	<div class="box_basic" id="user_edit">
-		<form method="post" action="{% if user %}{{base_path}}/user/update{% else %}{{base_path}}/user/save{% endif %}" id="user_edit_form">
+		<form method="post" action="{% if user and user.id %}{{base_path}}/user/update{% else %}{{base_path}}/user/save{% endif %}" id="user_edit_form">
 			{% if user %}
 				<input type="hidden" name="id" value="{{user.id}}" />
 			{% endif %}
@@ -22,7 +32,7 @@
 			<label for="user_edit_password">Salasana:</label>
 			<input type="password" id="user_edit_password" name="password" maxlength="20" value="{% if user %}{{user.password}}{% endif %}" /><br/>
 			<label for="user_edit_confirm">Vahvista salasana:</label>
-			<input type="password" id="user_edit_confirm" name="confirm" maxlength="20" value="{% if user %}{{user.password}}{% endif %}" /><br/>
+			<input type="password" id="user_edit_confirm" name="confirm" maxlength="20" value="{% if user and user.id and not errors %}{{user.password}}{% endif %}" /><br/>
 			<label for="user_edit_admin">Ylläpito-oikeus:</label>
 			<input type="checkbox" id="user_edit_admin" name="admin" {% if user and user.admin %}checked="checked"{% endif %} /><br/>
 			<label for="user_edit_name">Koko nimi:</label>

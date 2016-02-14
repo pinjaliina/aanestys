@@ -3,6 +3,12 @@
 
 	<h1>Hallinnoi käyttäjiä</h1>
 
+	{% if message %}
+		<div class="alert alert-success">
+		{{message}}
+		</div>
+	{% endif %}
+	
 	<div class="ctrl_btns">
 		<a class="btn btn-default" href="{{base_path}}/user/new">Lisää uusi</a>
 	</div>

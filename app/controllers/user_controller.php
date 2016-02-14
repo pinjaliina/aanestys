@@ -40,9 +40,17 @@
 				'email' => $p['email']
 			));
 			
-			$user->save();
-			
-			Redirect::to('/user/' . $user->id, array('message' => 'Lisättiin käyttäjä '. $user->login .'.'));
+			$errors = $user->errors();
+			if(strcmp($p['password'], $p['confirm']) != 0) {
+				$errors[] = "Syötetyt salasanat eivät täsmää.";
+			}
+			if(count($errors) == 0) {
+				$user->save();
+				Redirect::to('/user/' . $user->id, array('message' => 'Lisättiin käyttäjä '. $user->login .'.'));
+			}
+			else {
+				View::make('user/edit.html', array('errors' => $errors, 'user' => $user));
+			}
 		}
 		
 		public static function update(){
@@ -61,9 +69,24 @@
 				'email' => $p['email']
 			));
 			
-			$user->update();
-			
-			Redirect::to('/user/' . $user->id, array('message' => 'Tallennettiin käyttäjä '. $user->login .'.'));
+			$errors = $user->errors();
+			if(strlen($p['confirm']) > 0) {
+				if(strcmp($p['password'], $p['confirm']) != 0) {
+					$errors[] = "Syötetyt salasanat eivät täsmää.";
+				}
+			}
+			else {
+				// Password confirmation is zero-length; assume that the current
+				// password will not be upgraded.
+				unset($user->password);
+			}
+			if(count($errors) == 0) {
+				$user->update();
+				Redirect::to('/user/' . $user->id, array('message' => 'Tallennettiin käyttäjä '. $user->login .'.'));
+			}
+			else {
+				View::make('user/edit.html', array('errors' => $errors, 'user' => $user));			
+			}
 		}
 		
 		public static function delete($id){

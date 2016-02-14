@@ -21,10 +21,20 @@
 
       foreach($this->validators as $validator){
         // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+				$errors = array_merge($errors, $this->{$validator}());
       }
 
       return $errors;
     }
+		
+		public function validateStrLen($str, $maxlen, $minlen = 0, $name = 'Kentän') {
+			if($minlen > 0 && ($str == '' || $str == null || mb_strlen($str, 'UTF-8') < $minlen)) {
+				return "$name pituuden tulee olla vähintään $minlen merkkiä.";
+			}
+			if(mb_strlen($str, 'UTF-8') > $maxlen) {
+				return "$name pituuden tulee olla korkeintaan $maxlen merkkiä.";
+			}
+		}
 		
 		public static function fmtTime($timestamp){
 			// Y-m-d is pretty much mandatory, if we want to use the HTML5 date field,
