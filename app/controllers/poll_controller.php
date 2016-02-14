@@ -7,25 +7,30 @@
 	class PollController extends BaseController{
 
 		public static function index(){
+			self::check_logged_in();
 			$polls = Poll::findAll();
 			View::make('poll/index.html', array('polls' => $polls));
 		}
 		
 		public static function show($id){
+			self::check_logged_in();
 			$poll = array('poll' => Poll::findByPK($id), 'polloptions' => PollOption::findByPollId($id));
 			View::make('poll/show.html', $poll);
 		}
 
 		public static function create(){
+			self::check_logged_in();
 			View::make('poll/edit.html');
 		}
 
 		public static function edit($id){
+			self::check_logged_in();
 			$poll = array('poll' => Poll::findByPK($id), 'polloptions' => PollOption::findByPollId($id));
 			View::make('poll/edit.html', $poll);
 		}
 		
 		public static function save(){
+			self::check_logged_in();
 			$p = $_POST;
 			
 			$poll = new Poll(array(
@@ -57,6 +62,7 @@
 		}
 		
 		public static function update(){
+			self::check_logged_in();
 			$p = $_POST;
 			
 			$poll = new Poll(array(
@@ -73,6 +79,7 @@
 		}
 		
 		public static function delete($id){
+			self::check_logged_in();
 			$poll = new Poll(array(
 				'id' => $id	
 			));

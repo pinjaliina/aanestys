@@ -7,25 +7,30 @@
 	class UserController extends BaseController{
 
 		public static function index(){
+			self::check_logged_in();
 			$users = User::findAll();
 			View::make('user/index.html', array('users' => $users));
 		}
 		
 		public static function show($id){
+			self::check_logged_in();
 			$user = array('user' => User::findByPK($id));
 			View::make('user/show.html', $user);
 		}
 
 		public static function create(){
+			self::check_logged_in();
 			View::make('user/edit.html');
 		}
 
 		public static function edit($id){
+			self::check_logged_in();
 			$user = array('user' => User::findByPK($id));
 			View::make('user/edit.html', $user);
 		}
 		
 		public static function save(){
+			self::check_logged_in();
 			$p = $_POST;
 			
 			if(!isset($_POST['admin'])) {
@@ -54,6 +59,7 @@
 		}
 		
 		public static function update(){
+			self::check_logged_in();
 			$p = $_POST;
 			
 			if(!isset($_POST['admin'])) {
@@ -90,6 +96,7 @@
 		}
 		
 		public static function delete($id){
+			self::check_logged_in();
 			$user = new User(array(
 				'id' => $id	
 			));
