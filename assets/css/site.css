@@ -53,9 +53,9 @@
 	width: 220px;
 }
 
-#poll_edit > textarea{
+/*#poll_edit_form > textarea{
 	margin: 10px 0 2px 1px;
-}
+}*/
 
 #login_submit{
 	margin: 10px 3px 3px 103px;

@@ -21,6 +21,12 @@
 				<td class="row_title">Päättymisaika</td>
 				<td>{{poll.end_time}}</td>
 			</tr>
+			{% for option in polloptions %}
+				<tr>
+					<td class="row_title">Vaihtoehdon ”{{option.name}}” kuvaus</td>
+					<td>{{option.description}}</td>
+				</tr>
+			{% endfor %}
 		</table>
 	</div>
 	

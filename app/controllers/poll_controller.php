@@ -12,7 +12,7 @@
 		}
 		
 		public static function show($id){
-			$poll = array('poll' => Poll::findByPK($id));
+			$poll = array('poll' => Poll::findByPK($id), 'polloptions' => PollOption::findByPollId($id));
 			View::make('poll/show.html', $poll);
 		}
 
@@ -21,7 +21,7 @@
 		}
 
 		public static function edit($id){
-			$poll = array('poll' => Poll::findByPK($id));
+			$poll = array('poll' => Poll::findByPK($id), 'polloptions' => PollOption::findByPollId($id));
 			View::make('poll/edit.html', $poll);
 		}
 		
@@ -35,8 +35,25 @@
 				'end_time' => $p['end_time']
 			));
 			
-			$poll->save();
-			Redirect::to('/poll/' . $poll->id, array('message' => 'Lisättiin uusi äänestys '. $poll->name .'.'));
+			// Search the input array for Option model attributes and build an array
+			// out of them:
+			$poll_options = array();
+			$matching_keys = array();
+			foreach($p as $key => $value){
+				$matches = array();
+				if (preg_match("/^option_name_new_([0-9]+)$/", $key, $matches)) {
+					// This works. I'll commit here and continue sometime later to
+					// fullfill the stupid course schedule requirements about doing input
+					// validators first. But we should be able to pickup any submitted
+					// Option model attributes with a relative ease and then save them
+					// separately. Ditto for self::update().
+					Kint::dump($matches);
+				}
+			}
+			
+			Kint::dump($p);
+			//$poll->save();
+			//Redirect::to('/poll/' . $poll->id, array('message' => 'Lisättiin uusi äänestys '. $poll->name .'.'));
 		}
 		
 		public static function update(){
@@ -50,8 +67,9 @@
 				'end_time' => $p['end_time']
 			));
 			
-			$poll->update();
-			Redirect::to('/poll/' . $poll->id, array('message' => 'Tallennettiin äänestys '. $poll->name .'.'));
+			Kint::dump($p);
+			//$poll->update();
+			//Redirect::to('/poll/' . $poll->id, array('message' => 'Tallennettiin äänestys '. $poll->name .'.'));
 		}
 		
 		public static function delete($id){

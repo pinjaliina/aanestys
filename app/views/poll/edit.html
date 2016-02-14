@@ -15,11 +15,27 @@
 			<label for="poll_edit_name">Nimi:</label>
 			<input type="text" id="poll_edit_name" name="name" maxlength="20" value="{% if poll %}{{poll.name}}{% endif %}" /><br/>
 			<label for="poll_edit_description">Kuvaus:</label>
-			<input type="text" id="poll_edit_description" name="description" maxlength="300" value="{% if poll %}{{poll.description}}{% endif %}" /><br/>
+			<textarea id="poll_edit_description" name="description" cols="30" maxlength="100">{% if poll %}{{poll.description}}{% endif %}</textarea><br/>
+			<!--<input type="text" id="poll_edit_description" name="description" maxlength="300" value="{% if poll %}{{poll.description}}{% endif %}" /><br/>-->
 			<label for="poll_edit_start">Alkamisaika:</label>
 			<input type="date" id="poll_edit_start" name="start_time" value="{% if poll %}{{poll.start_time}}{% endif %}" /><br/>
 			<label for="poll_edit_end">Päättymisaika:</label>
 			<input type="date" id="poll_edit_end" name="end_time" value="{% if poll %}{{poll.end_time}}{% endif %}" /><br/>
+			{% if poll and polloptions %}
+				{% for option in polloptions %}
+					<label for="poll_option_name_{{option.id}}">Vaihtoehdon nimi</label>
+					<input type="text" id="poll_option_name_{{option.id}}" name="option_name_{{option.id}}" maxlength="20" value="{{option.name}}" /><br/>
+					<label for="poll_option_description_{{option.id}}">Vaihtoehdon kuvaus</label>
+					<textarea id="poll_option_description_{{option.id}}" name="option_description_{{option.id}}" cols="30" maxlength="100">{{option.description}}</textarea><br/>
+					<!--<input type="text" id="poll_option_description_{{option.id}}" name="option_description_{{option.id}}" maxlength="300" value="{{option.description}}" /><br/>-->
+				{% endfor %}
+			{% else %}
+				<label for="poll_option_name_new_1">Vaihtoehdon nimi</label>
+				<input type="text" id="poll_option_name_new_1" name="option_name_new_1" maxlength="20" value="" /><br/>
+				<label for="poll_option_description_new_1">Vaihtoehdon kuvaus</label>
+				<textarea id="poll_option_description_new_1" name="option_description_new_1" cols="30" maxlength="100"></textarea><br/>
+			{% endif %}
+			<input type="button" id="poll_edit_add_option" {% if not poll %}{% endif %} value="Lisää äänestykseen uusi vaihtoehto" /><br/>
 			<input type="submit" id="poll_edit_submit" name="submit" value="{% if poll %}Tallenna muutokset{% else %}Lisää äänestys{% endif %}" />
 		</form>
 	</div>
