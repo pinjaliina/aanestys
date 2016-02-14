@@ -1,7 +1,7 @@
 <?php
 
   $routes->get('/', function() {
-    HelloWorldController::index();
+    PollController::index();
   });
 	
 	$routes->get('/user', function() {
@@ -63,7 +63,11 @@
 		PollController::delete($id);
 	});*/
 
-  $routes->get('/hiekkalaatikko', function() {
+  $routes->get('/helloworld', function() {
+    HelloWorldController::index();
+  });
+	
+	$routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });
 	
