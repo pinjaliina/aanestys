@@ -9,8 +9,12 @@ Yleisiä linkkejä:
 
 Valitsemani aihe on [Äänestys](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Aanestys.html).
 
-* Tähän asti tehtyä (7.2.2016):
- * [Käyttäjänhallinta](http://pjalkane.users.cs.helsinki.fi/aanestys/user). Koko ns. CRUD-nelikko periaatteessa toimii, mutta mitään käyttöoikeuksien tarkistusta tai syötteiden validointia ei vielä ole toteutettu.
+* Tähän asti tehtyä (15.2.2016):
+ * [Äänestysten listaussivu](http://pjalkane.users.cs.helsinki.fi/aanestys/user).
+  * Koko sovelluksen [etusivu](http://pjalkane.users.cs.helsinki.fi/aanestys) on toistaiseksi niin ikään ohjattu tänne.
+  * Myös yksittäisen äänestyksen listaussivu toimii, mutta lisäys/muokkaus/poisto ovat vielä osittain kesken. Tämän mallin näkymien kautta kontrolloidaan myös äänestyksen vaihtoehtoja ja annettuja ääniä, joten näiden rakentaminen ei ole ihan yhtä yksinkertaista kuin käyttäjämallin osin dynaamisine lomakkeineen ja useamman tietokohteen malleihin viittaavine controllereineen.
+ * [Käyttäjänhallinta](http://pjalkane.users.cs.helsinki.fi/aanestys/user). Koko ns. CRUD-nelikko periaatteessa toimii, ~~mutta mitään käyttöoikeuksien tarkistusta tai syötteiden validointia ei vielä ole toteutettu~~ syötteiden validointi on toteutettu, ja pääsy tarkistetaan sillä tasolla, että muut näkymät kirjautumista lukuunottamatta on suljettu anonyymeilta käyttäjiltä, mutta mitään auktorisointia ei vielä tarkisteta, eli kaikilla käyttäjillä on samat oikeudet.
+  * Kirjautumista voi yrittää käyttäjätunnuksella ```pinjaliina``` ja salasanalla ```TOP SECRET```.
 
 * Demosivuja:
  * [kirjautumissivun demo](http://pjalkane.users.cs.helsinki.fi/aanestys/login)
