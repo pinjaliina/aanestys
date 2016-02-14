@@ -25,5 +25,14 @@
 
       return $errors;
     }
+		
+		public static function fmtTime($timestamp){
+			// Y-m-d is pretty much mandatory, if we want to use the HTML5 date field,
+			// else Google Chrome breaks. This is silly, because in some other
+			// browsers a format like 'j.n.Y' would give more readable results.
+			// There might be a way around this by using javascript in the view,
+			// but I'm not going to investigate that right now.
+			return date('Y-m-d', strtotime($timestamp));
+		}
 
   }

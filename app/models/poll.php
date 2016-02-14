@@ -28,8 +28,8 @@
 						'id' => $r['id'],
 						'name' => $r['name'],
 						'description' => $r['description'],
-						'start_time' => $r['start_time'],
-						'end_time' => $r['end_time']
+						'start_time' => self::fmtTime($r['start_time']),
+						'end_time' => self::fmtTime($r['end_time'])
 				));
 			}
 			
@@ -46,8 +46,8 @@
 						'id' => $r['id'],
 						'name' => $r['name'],
 						'description' => $r['description'],
-						'start_time' => $r['start_time'],
-						'end_time' => $r['end_time']
+						'start_time' => self::fmtTime($r['start_time']),
+						'end_time' => self::fmtTime($r['end_time'])
 				));
 			}
 			

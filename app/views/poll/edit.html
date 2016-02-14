@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+	{% if poll %}
+		<h1>Äänestyksen tiedot</h1>
+	{% else %}
+		<h1>Lisää uusi äänestys</h1>
+	{% endif %}
+	
+	<div class="box_basic" id="poll_edit">
+		<form method="post" action="{% if poll %}{{base_path}}/poll/update{% else %}{{base_path}}/poll/save{% endif %}" id="poll_edit_form">
+			{% if poll %}
+				<input type="hidden" name="id" value="{{poll.id}}" />
+			{% endif %}
+			<label for="poll_edit_name">Nimi:</label>
+			<input type="text" id="poll_edit_name" name="name" maxlength="20" value="{% if poll %}{{poll.name}}{% endif %}" /><br/>
+			<label for="poll_edit_description">Kuvaus:</label>
+			<input type="text" id="poll_edit_description" name="description" maxlength="300" value="{% if poll %}{{poll.description}}{% endif %}" /><br/>
+			<label for="poll_edit_start">Alkamisaika:</label>
+			<input type="date" id="poll_edit_start" name="start_time" value="{% if poll %}{{poll.start_time}}{% endif %}" /><br/>
+			<label for="poll_edit_end">Päättymisaika:</label>
+			<input type="date" id="poll_edit_end" name="end_time" value="{% if poll %}{{poll.end_time}}{% endif %}" /><br/>
+			<input type="submit" id="poll_edit_submit" name="submit" value="{% if poll %}Tallenna muutokset{% else %}Lisää äänestys{% endif %}" />
+		</form>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>Äänestyksen tiedot</h1>
+
+	<div class="box_basic" id="poll_show">
+		<table class="table-striped">
+			<tr>
+				<td class="row_title">Nimi</td>
+				<td>{{poll.name}}</td>
+			</tr>
+			<tr>
+				<td class="row_title">Kuvaus</td>
+				<td>{{poll.description}}</td>
+			</tr>
+			<tr>
+				<td class="row_title">Alkamisaika</td>
+				<td>{{poll.start_time}}</td>
+			</tr>
+			<tr>
+				<td class="row_title">Päättymisaika</td>
+				<td>{{poll.end_time}}</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="ctrl_btns">
+		<a class="btn btn-default" href="{{base_path}}/poll/{{poll.id}}/edit">Muokkaa tietoja</a>
+		<a class="btn btn-default" href="{{base_path}}/poll/{{poll.id}}/delete">Poista äänestys</a>
+	</div>
+
+{% endblock %}

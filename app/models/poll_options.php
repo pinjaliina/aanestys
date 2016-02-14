@@ -71,4 +71,9 @@
 			$q = DB::connection()->prepare('DELETE FROM '. self::tbl() .' WHERE id = :id');
 			$q->execute(array($this->id));
 		}
+
+		public function deleteByPollId(){
+			$q = DB::connection()->prepare('DELETE FROM '. self::tbl() .' WHERE polls_id = :polls_id');
+			$q->execute(array($this->polls_id));
+		}
 	}

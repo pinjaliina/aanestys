@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>Hallinnoi äänestyksiä</h1>
+
+	<div class="ctrl_btns">
+		<a class="btn btn-default" href="{{base_path}}/poll/new">Lisää uusi</a>
+	</div>
+	
+	<div class="box_basic" id="poll_admin_list">
+		<table class="table-striped">
+			<thead>
+				<tr>
+					<th>Äänestys</th>
+					<th>Aloitusaika</th>
+					<th colspan="3">Päättymisaika</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for poll in polls %}
+					<tr>
+						<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.name}}</a></td>
+						<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.start_time}}</a></td>
+						<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.end_time}}</a></td>
+						<td class="action"><a href="{{base_path}}/poll/{{poll.id}}/edit">Muokkaa</a></td>
+						<td class="action"><a href="{{base_path}}/poll/{{poll.id}}/delete">Poista</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

@@ -51,3 +51,51 @@
 	$routes->get('/poll_edit', function() {
 		HelloWorldController::poll_edit();
 	});
+
+	$routes->get('/poll', function() {
+		PollController::index();
+	});
+
+	$routes->get('/poll/new', function() {
+		PollController::create();
+	});
+
+	$routes->post('/poll/save', function() {
+		PollController::save();
+	});
+
+	$routes->post('/poll/update', function() {
+		PollController::update();
+	});
+
+	$routes->get('/poll/:id', function($id) {
+		PollController::show($id);
+	});
+
+	$routes->get('/poll/:id/edit', function($id) {
+		PollController::edit($id);
+	});
+	
+	$routes->get('/poll/:id/delete', function($id){
+		PollController::delete($id);
+	});
+
+  $routes->get('/hiekkalaatikko', function() {
+    HelloWorldController::sandbox();
+  });
+	
+	$routes->get('/login', function() {
+		HelloWorldController::login();
+	});
+
+	$routes->get('/poll_list', function() {
+		HelloWorldController::poll_list();
+	});
+
+	$routes->get('/poll_show', function() {
+		HelloWorldController::poll_show();
+	});
+	
+	$routes->get('/poll_edit', function() {
+		HelloWorldController::poll_edit();
+	});
