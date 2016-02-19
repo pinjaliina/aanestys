@@ -3,6 +3,12 @@
 
 	<h1>Äänestyksen tiedot</h1>
 
+	{% if message %}
+		<div class="alert alert-success">
+		{{message}}
+		</div>
+	{% endif %}
+	
 	<div class="box_basic" id="poll_show">
 		<table class="table-striped">
 			<tr>
