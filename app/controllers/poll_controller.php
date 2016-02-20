@@ -79,9 +79,40 @@
 				'end_time' => $p['end_time']
 			));
 			
-			Kint::dump($p);
-			//$poll->update();
-			//Redirect::to('/poll/' . $poll->id, array('message' => 'Tallennettiin äänestys '. $poll->name .'.'));
+			// Search the input array for Option model attributes and build an array
+			// out of them:
+			$poll_options = array();
+			foreach($p as $key => $value){
+				$matches = array();
+				if (preg_match("/^option_name_([0-9]+)$/", $key, $matches)) {
+					$poll_options[$matches[1]]['id'] = $p['option_'. $matches[1]];
+					$poll_options[$matches[1]]['name'] = $p[$matches[0]];
+					$poll_options[$matches[1]]['description'] = $p['option_description_'. $matches[1]];
+				}
+				else if (preg_match("/^option_name_new_([0-9]+)$/", $key, $matches)) {
+					$poll_options[$matches[1]]['name'] = $p[$matches[0]];
+					$poll_options[$matches[1]]['description'] = $p['option_description_new_'. $matches[1]];
+				}
+			}
+			
+			$poll->update();
+			
+			foreach($poll_options as $option) {
+				$polloption = new PollOption(array(
+					'id' => $option['id'],
+					'polls_id' => $poll->id,
+					'name' => $option['name'],
+					'description' => $option['description']	
+				));
+				if($polloption->id) {
+					$polloption->update();										
+				}
+				else {
+					$polloption->save();					
+				}
+			}
+			
+			Redirect::to('/poll/' . $poll->id, array('message' => 'Tallennettiin äänestys '. $poll->name .'.'));
 		}
 		
 		public static function delete($id){
@@ -90,6 +121,7 @@
 				'id' => $id	
 			));
 			
+			PollOption::deleteByPollId($poll->id);
 			$poll->delete();
 			Redirect::to('/poll', array('message' => 'Äänestys poistettiin onnistuneesti.'));
 		}

@@ -23,6 +23,7 @@
 			<input type="date" id="poll_edit_end" name="end_time" value="{% if poll %}{{poll.end_time}}{% endif %}" /><br/>
 			{% if poll and polloptions %}
 				{% for option in polloptions %}
+					<input type="hidden" name="option_{{option.id}}" value="{{option.id}}" />
 					<label for="poll_option_name_{{option.id}}">Vaihtoehdon nimi</label>
 					<input type="text" id="poll_option_name_{{option.id}}" name="option_name_{{option.id}}" maxlength="20" value="{{option.name}}" /><br/>
 					<label for="poll_option_description_{{option.id}}">Vaihtoehdon kuvaus</label>

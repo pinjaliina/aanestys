@@ -64,12 +64,9 @@
 		PollController::edit($id);
 	});
 	
-	/* Disable the delete route for now, as it doesn't yet handle any tables with
-	 * referential integrity restrictions intelligently. We don't really want
-	 * the course assistants to mess with it.
 	$routes->get('/poll/:id/delete', function($id){
 		PollController::delete($id);
-	});*/
+	});
 
   $routes->get('/helloworld', function() {
     HelloWorldController::index();
