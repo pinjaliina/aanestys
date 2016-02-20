@@ -99,12 +99,12 @@
 			
 			foreach($poll_options as $option) {
 				$polloption = new PollOption(array(
-					'id' => $option['id'],
 					'polls_id' => $poll->id,
 					'name' => $option['name'],
 					'description' => $option['description']	
 				));
-				if($polloption->id) {
+				if(isset($option['id'])) {
+					$polloption->id = $option['id'];
 					$polloption->update();										
 				}
 				else {

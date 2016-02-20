@@ -35,6 +35,10 @@
 				<input type="text" id="poll_option_name_new_1" name="option_name_new_1" maxlength="20" value="" /><br/>
 				<label for="poll_option_description_new_1">Vaihtoehdon kuvaus</label>
 				<textarea id="poll_option_description_new_1" name="option_description_new_1" cols="30" maxlength="100"></textarea><br/>
+				<label for="poll_option_name_new_2">Vaihtoehdon nimi</label>
+				<input type="text" id="poll_option_name_new_2" name="option_name_new_2" maxlength="20" value="" /><br/>
+				<label for="poll_option_description_new_2">Vaihtoehdon kuvaus</label>
+				<textarea id="poll_option_description_new_2" name="option_description_new_2" cols="30" maxlength="100"></textarea><br/>
 			{% endif %}
 			<input type="button" id="poll_edit_add_option" {% if not poll %}{% endif %} value="Lisää äänestykseen uusi vaihtoehto" /><br/>
 			<input type="submit" id="poll_edit_submit" name="submit" value="{% if poll %}Tallenna muutokset{% else %}Lisää äänestys{% endif %}" />
