@@ -51,20 +51,50 @@
 				}
 			}
 			
-			$poll->save();
+			$errors = $poll->errors();
 			
-			if($poll->id) {
-				foreach($poll_options as $option) {
+			$polloptions = array();
+			if(count($errors) == 0) {			
+				$poll->save();
+				if($poll->id) {
+					foreach($poll_options as $option) {
+						$polloption = new PollOption(array(
+							'polls_id' => $poll->id,
+							'name' => $option['name'],
+							'description' => $option['description']	
+						));
+						$errors = $polloption->errors();
+						if(count($errors) == 0) {
+							$polloption->save();
+						}
+						else {
+							$polloptions[] = $polloption;
+						}
+					}
+				}
+
+				if(empty($polloptions)) {
+					Redirect::to('/poll/' . $poll->id, array('message' => 'Lisättiin uusi äänestys '. $poll->name .'.'));
+				}
+				else { // The poll was saved successfully but options weren't. Edit the poll.
+					$errors[] = 'Lisättiin uusi äänestys '. $poll->name .', mutta äänestyksen vaihtoehtoja ei saatu tallennettua. Tarkista virheet';
+					View::make('poll/edit.html', array('errors' => $errors, 'poll' => $poll, 'polloptions' => $polloptions));
+				}
+			}
+			else { // The actual poll wasn't saved.
+				foreach($poll_options as $option) { // We don't have the poll id.
 					$polloption = new PollOption(array(
-						'polls_id' => $poll->id,
 						'name' => $option['name'],
 						'description' => $option['description']	
 					));
-					$polloption->save();
+					$optionerrors = $polloption->errors();
+					if(!empty($optionerrors)) {
+						$errors = array_merge($errors, $optionerrors);
+					}
+					$polloptions[] = $polloption;
 				}
+				View::make('poll/edit.html', array('errors' => $errors, 'poll' => $poll, 'polloptions' => $polloptions));
 			}
-			
-			Redirect::to('/poll/' . $poll->id, array('message' => 'Lisättiin uusi äänestys '. $poll->name .'.'));
 		}
 		
 		public static function update(){
@@ -89,30 +119,68 @@
 					$poll_options[$matches[1]]['name'] = $p[$matches[0]];
 					$poll_options[$matches[1]]['description'] = $p['option_description_'. $matches[1]];
 				}
+				// Even though we've decided to not support adding new options to
+				// existing polls, we still need this to handle situations where a new
+				// poll was saved succesfully but its options werent.
 				else if (preg_match("/^option_name_new_([0-9]+)$/", $key, $matches)) {
 					$poll_options[$matches[1]]['name'] = $p[$matches[0]];
 					$poll_options[$matches[1]]['description'] = $p['option_description_new_'. $matches[1]];
 				}
 			}
 			
-			$poll->update();
+			$errors = $poll->errors();
 			
-			foreach($poll_options as $option) {
-				$polloption = new PollOption(array(
-					'polls_id' => $poll->id,
-					'name' => $option['name'],
-					'description' => $option['description']	
-				));
-				if(isset($option['id'])) {
-					$polloption->id = $option['id'];
-					$polloption->update();										
+			$polloptions = array();
+			if(count($errors) == 0) {			
+				$poll->update();
+
+				foreach($poll_options as $option) {
+					$polloption = new PollOption(array(
+						'polls_id' => $poll->id,
+						'name' => $option['name'],
+						'description' => $option['description']	
+					));
+					$errors = $polloption->errors();
+					if(count($errors) == 0) {
+						if(isset($option['id'])) {
+							$polloption->id = $option['id'];
+							$polloption->update();										
+						}
+						else {
+							$polloption->save();					
+						}
+					}
+					else {
+						$polloptions[] = $polloption;						
+					}
 				}
-				else {
-					$polloption->save();					
+				if(empty($polloptions)) {
+					Redirect::to('/poll/' . $poll->id, array('message' => 'Tallennettiin äänestys '. $poll->name .'.'));
+				}
+				else { // The poll was saved successfully but options weren't. Edit the poll.
+					$errors[] = 'Tallennettiin äänestys '. $poll->name .', mutta äänestyksen vaihtoehtoja ei saatu tallennettua. Tarkista virheet';
+					View::make('poll/edit.html', array('errors' => $errors, 'poll' => $poll, 'polloptions' => $polloptions));
 				}
 			}
-			
-			Redirect::to('/poll/' . $poll->id, array('message' => 'Tallennettiin äänestys '. $poll->name .'.'));
+			else { // The actual poll wasn't saved.
+				foreach($poll_options as $option) {
+					$polloption = new PollOption(array(
+						'polls_id' => $poll->id,
+						'name' => $option['name'],
+						'description' => $option['description']	
+					));
+					if(isset($option['id'])) {
+						$polloption->id = $option['id'];
+					}
+					$optionerrors = $polloption->errors();
+					if(!empty($optionerrors)) {
+						$errors = array_merge($errors, $optionerrors);
+					}
+					$polloptions[] = $polloption;
+				}
+				View::make('poll/edit.html', array('errors' => $errors, 'poll' => $poll, 'polloptions' => $polloptions));
+			}
+
 		}
 		
 		public static function delete($id){

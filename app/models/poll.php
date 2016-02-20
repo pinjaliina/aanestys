@@ -8,6 +8,65 @@
 		//Constructor
 		public function __construct($attributes){
 			parent::__construct($attributes);
+			$this->validators = array('validate_name', 'validate_description', 'validate_start_time', 'validate_end_time');
+	}
+		
+		public function validate_name(){
+			$errors = array();
+			$nameErr = $this->validateStrLen($this->name, 20, 3, 'Äänestyksen nimen');
+			if(isset($nameErr)){
+				$errors[] = $nameErr;
+			}
+			return $errors;
+		}
+		
+		public function validate_description(){
+			$errors = array();
+			$nameErr = $this->validateStrLen($this->description, 100, 0, 'Äänestyksen kuvauksen');
+			if(isset($nameErr)){
+				$errors[] = $nameErr;
+			}
+			return $errors;
+		}
+		
+		public function validate_start_time(){
+			$errors = array();
+			$check = date_parse_from_format('Y-m-d', $this->start_time);
+			$formErr = '';
+			if($check['warning_count'] > 0 || $check['error_count'] > 0) {
+				$formErr = 'Aloitusaika tulee syöttää muodossa VVVV-KK-PP.';
+			}
+			else {
+				unset($formErr);
+			}
+			if(isset($formErr)){
+				$errors[] = $formErr;
+			}
+			return $errors;
+		}
+		
+		public function validate_end_time(){
+			$errors = array();
+			$check = date_parse_from_format('Y-m-d', $this->end_time);
+			$formErr = '';
+			if($check['warning_count'] > 0 || $check['error_count'] > 0) {
+				$formErr = 'Päättymisaika tulee syöttää muodossa VVVV-KK-PP.';
+			}
+			if(!empty($formErr)){
+				$errors[] = $formErr;
+			}
+			$logicErr = '';
+			if(!$this->validate_start_time() && empty($formErr)) {
+				$start = new DateTime($this->start_time);
+				$end = new DateTime($this->end_time);
+				if($start >= $end) {
+					$logicErr = 'Aloitusajan tulee olla ennen päättymisaikaa.';
+				}
+			}
+			if(!empty($logicErr)){
+				$errors = $logicErr;
+			}
+			return $errors;
 		}
 		
 		private static function tbl() {

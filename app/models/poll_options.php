@@ -8,6 +8,25 @@
 		//Constructor
 		public function __construct($attributes){
 			parent::__construct($attributes);
+			$this->validators = array('validate_name', 'validate_description');
+		}
+		
+		public function validate_name(){
+			$errors = array();
+			$nameErr = $this->validateStrLen($this->name, 20, 1, 'Vaihtoehdon nimen');
+			if(isset($nameErr)){
+				$errors[] = $nameErr;
+			}
+			return $errors;
+		}
+		
+		public function validate_description(){
+			$errors = array();
+			$nameErr = $this->validateStrLen($this->description, 100, 0, 'Vaihtoehdon kuvauksen');
+			if(isset($nameErr)){
+				$errors[] = $nameErr;
+			}
+			return $errors;
 		}
 		
 		private static function tbl() {
