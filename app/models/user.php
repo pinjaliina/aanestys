@@ -17,7 +17,7 @@
 		public function validate_login(){
 			// FIXME: We should check whether the login name already exists and add
 			// an error if it does to avoid the much uglier "violation of unique
-			// constraint" SQL error.
+			// constraint" SQL error. Issue #4.
 			$errors = array();
 			$nameErr = $this->validateStrLen($this->login, 15, 3, 'Käyttäjätunnuksen');
 			if(isset($nameErr)){

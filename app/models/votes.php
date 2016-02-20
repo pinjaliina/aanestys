@@ -3,9 +3,6 @@
   class Vote extends BaseModel{
 		
 		//Attributes
-		// NOTE: in real life the password should be salted and hashed (and the
-		// string hidden from the UI), but as that isn't included in the course
-		// requirements, I won't implement it.
 		public $id, $polls_id, $poll_options_id, $time;
 		
 		//Constructor
