@@ -16,15 +16,16 @@
 			self::check_logged_in();
 			$user = User::findByPK($id);
 			$polls = Poll::findByUser($id);
+			$nonpolls = Poll::findbyUserNeg($id);
 			foreach ($polls as $poll){
 				$poll->checkVoteStatus($id);
 			}
-			$data = array(
+			$objects = array(
 				'user' => $user,
 				'polls' => $polls,
-				'nonpolls' => Poll::findbyUserNeg($id)
+				'nonpolls' => $nonpolls
 			);
-			View::make('user/show.html', $data);
+			View::make('user/show.html', $objects);
 		}
 
 		public static function create(){
