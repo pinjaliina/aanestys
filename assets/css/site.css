@@ -16,8 +16,20 @@
 	padding: 10px;
 }
 
+.box_basic_inner{
+	padding: 1px;
+}
+
 .box_basic table {
 	border: 1px solid #b7ddf2;
+}
+
+#poll_user_list > table {
+	margin-bottom: 5px;
+}
+#poll_user_list > div.box_basic_inner > p {
+	margin: 0;
+	font-weight: bold;
 }
 
 .box_basic thead{

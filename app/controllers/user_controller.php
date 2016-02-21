@@ -14,8 +14,17 @@
 		
 		public static function show($id){
 			self::check_logged_in();
-			$user = array('user' => User::findByPK($id));
-			View::make('user/show.html', $user);
+			$user = User::findByPK($id);
+			$polls = Poll::findByUser($id);
+			foreach ($polls as $poll){
+				$poll->checkVoteStatus($id);
+			}
+			$data = array(
+				'user' => $user,
+				'polls' => $polls,
+				'nonpolls' => Poll::findbyUserNeg($id)
+			);
+			View::make('user/show.html', $data);
 		}
 
 		public static function create(){

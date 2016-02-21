@@ -56,10 +56,10 @@
 			return $errors;
 		}
 		
-		private static function tbl() {
-			return DatabaseConfig::PREFIX .'users';
+		private static function tbl($tblname = 'users') {
+			return DatabaseConfig::PREFIX . $tblname;
 		}
-		
+
 		public static function authenticate($login, $password){
 			$user = self::findByLoginName($login);
 			if($user) {

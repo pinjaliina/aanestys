@@ -9,6 +9,8 @@
 		</div>
 	{% endif %}
 	
+	<h2>Perustiedot</h2>
+	
 	<div class="box_basic" id="user_show">
 		<table class="table-striped">
 			<tr>
@@ -39,4 +41,46 @@
 		<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/delete">Poista käyttäjä</a>
 	</div>
 
+	<h2>Äänestykset</h2>
+	
+	<div class="box_basic" id="poll_user_list">
+		{% if polls %}	
+			<table class="table-striped">
+				<thead>
+					<tr>
+						<th>Äänestys</th>
+						<th>Aloitusaika</th>
+						<th>Päättymisaika</th>
+						<th colspan="2">Äänestänyt</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for poll in polls %}
+						<tr>
+							<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.name}}</a></td>
+							<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.start_time}}</a></td>
+							<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.end_time}}</a></td>
+							<td>{% if poll.voted %}Kyllä{% else %}Ei{% endif %}</td>
+							<td class="action"><a href="{{base_path}}/poll/{{poll.id}}/{{user.id}}/removeuser">Poista käyttäjä äänestyksestä</a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+		<div class="box_basic_inner">
+		{% if nonpolls %}
+			<form method="post" action="{{base_path}}/poll/adduser/{{user.id}}" id="user_add_to_poll_form">
+				<select id="user_add_to_poll_list" name="poll">
+					{% for nonpoll in nonpolls %}
+						<option value="{{nonpoll.id}}">{{nonpoll.name}}</option>
+					{% endfor %}
+				</select>
+				<input type="submit" id="user_add_to_poll_submit" name="submit" value="Lisää käyttäjä äänestykseen" />
+			</form>
+		{% else %}
+			<p>Käyttäjä kuluu kaikkiin järjestelmään tallennettuihin äänestyksiin.</p>
+		{% endif %}
+		</div>
+	</div>
+		
 {% endblock %}

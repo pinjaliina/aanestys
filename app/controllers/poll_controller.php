@@ -193,4 +193,25 @@
 			Redirect::to('/poll', array('message' => 'Äänestys poistettiin onnistuneesti.'));
 		}
 		
+		public static function addUser($users_id){
+			self::check_logged_in();
+			
+			$p = $_POST;
+
+			$poll = Poll::findByPK($p['poll']);
+			$user = User::findByPK($users_id);
+			
+			$poll->addUser($user->id);
+			Redirect::to('/user/'. $users_id, array('message' => 'Käyttäjä '. $user->login .' lisättiin onnistuneesti äänestykseen '. $poll->name .'.'));
+		}
+
+		public static function removeUser($polls_id, $users_id){
+			self::check_logged_in();
+			$poll = Poll::findByPK($polls_id);
+			$user = User::findByPK($users_id);
+			
+			$poll->removeUser($user->id);
+			Redirect::to('/user/'. $users_id, array('message' => 'Käyttäjä '. $user->login .' poistettiin onnistuneesti äänestyksestä '. $poll->name .'.'));
+		}
+		
 	}

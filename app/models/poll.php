@@ -2,8 +2,8 @@
 
   class Poll extends BaseModel{
 		
-		//Attributes
-		public $id, $name, $description, $start_time, $end_time;
+		//Attributes. $voted is a temporary attribute and not in the DB schema.
+		public $id, $name, $description, $start_time, $end_time, $voted;
 		
 		//Constructor
 		public function __construct($attributes){
@@ -69,8 +69,8 @@
 			return $errors;
 		}
 		
-		private static function tbl() {
-			return DatabaseConfig::PREFIX .'polls';
+		private static function tbl($tblname = 'polls') {
+			return DatabaseConfig::PREFIX . $tblname;
 		}
 		
 		public static function findAll(){
@@ -111,6 +111,46 @@
 			
 		}
 		
+		public static function findByUser($users_id) {
+			$sql = 'SELECT p.* FROM ' . self::tbl() . ' p INNER JOIN '. self::tbl('users_polls') .' up ON p.id = up.polls_id AND up.users_id = :users_id';
+			$q = DB::connection()->prepare($sql);
+			$q->execute(array('users_id' => $users_id));
+			$rows = $q->fetchAll();
+			
+			$polls = array();
+			foreach($rows as $r) {
+				$polls[] = new Poll(array(
+						'id' => $r['id'],
+						'name' => $r['name'],
+						'description' => $r['description'],
+						'start_time' => self::fmtTime($r['start_time']),
+						'end_time' => self::fmtTime($r['end_time'])
+				));
+			}
+			
+			return $polls;			
+		}
+
+		public static function findByUserNeg($users_id) {
+			$sql = 'SELECT DISTINCT p.* FROM ' . self::tbl() . ' p LEFT JOIN '. self::tbl('users_polls') .' up ON p.id = up.polls_id AND up.users_id = :users_id LEFT JOIN '. self::tbl('users_polls') .' up2 ON p.id=up2.polls_id and up2.users_id <> :users_id WHERE up.users_id IS NULL';
+			$q = DB::connection()->prepare($sql);
+			$q->execute(array('users_id' => $users_id));
+			$rows = $q->fetchAll();
+			
+			$polls = array();
+			foreach($rows as $r) {
+				$polls[] = new Poll(array(
+						'id' => $r['id'],
+						'name' => $r['name'],
+						'description' => $r['description'],
+						'start_time' => self::fmtTime($r['start_time']),
+						'end_time' => self::fmtTime($r['end_time'])
+				));
+			}
+			
+			return $polls;			
+		}
+
 		public function save(){
 			$q = DB::connection()->prepare('INSERT INTO '. self::tbl() .' (name, description, start_time, end_time) VALUES (:name, :description, :start_time, :end_time) RETURNING id');
 			$q->execute(array($this->name, $this->description, $this->start_time, $this->end_time));
@@ -129,4 +169,25 @@
 			$q = DB::connection()->prepare('DELETE FROM '. self::tbl() .' WHERE id = :id');
 			$q->execute(array($this->id));
 		}
+		
+		public function addUser($users_id){
+			$q = DB::connection()->prepare('INSERT INTO '. self::tbl('users_polls') .' (polls_id, users_id) VALUES (:polls_id, :users_id)');
+			$q->execute(array($this->id, $users_id));			
+		}
+		
+		public function removeUser($users_id){
+			$q = DB::connection()->prepare('DELETE FROM '. self::tbl('users_polls') .' WHERE polls_id = :polls_id AND users_id = :users_id');
+			$q->execute(array($this->id, $users_id));			
+		}
+					
+		public function checkVoteStatus($users_id){
+			$sql = 'SELECT voted FROM '. self::tbl('users_polls') .' WHERE users_id = :users_id AND polls_id = :polls_id';
+			$q = DB::connection()->prepare($sql);
+			$q->execute(array('users_id' => $users_id, 'polls_id' => $this->id));
+			$r = $q->fetch();
+			if($r) {
+				$this->voted = $r['voted'];
+			}
+		}
+
 	}

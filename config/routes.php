@@ -68,6 +68,18 @@
 		PollController::delete($id);
 	});
 
+	$routes->get('/poll/:id/delete', function($id){
+		PollController::delete($id);
+	});
+
+	$routes->post('/poll/adduser/:uid', function($uid){
+		PollController::addUser($uid);
+	});
+
+	$routes->get('/poll/:id/:uid/removeuser', function($id, $uid){
+		PollController::removeUser($id, $uid);
+	});
+
   $routes->get('/helloworld', function() {
     HelloWorldController::index();
   });
