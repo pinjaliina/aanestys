@@ -189,7 +189,6 @@
 				'id' => $id	
 			));
 			
-			PollOption::deleteByPollId($poll->id);
 			$poll->delete();
 			Redirect::to('/poll', array('message' => 'Äänestys poistettiin onnistuneesti.'));
 		}

@@ -88,8 +88,8 @@
 			$q->execute(array($this->id));
 		}
 
-		public static function deleteByPollId($pollid){
+		public function deleteByPollId(){
 			$q = DB::connection()->prepare('DELETE FROM '. self::tbl() .' WHERE polls_id = :polls_id');
-			$q->execute(array('polls_id' => $pollid));
+			$q->execute(array($this->pollid));
 		}
 	}
