@@ -10,6 +10,12 @@
       </ul>
     </div>
   {% endif %}
+
+	{% if message %}
+		<div class="alert alert-{{category}}">
+		{{message}}
+		</div>
+	{% endif %}
 	
 	<div class="box_basic" id="login_container">
 		<form method="post" action="{{base_path}}/login" id="login_form">

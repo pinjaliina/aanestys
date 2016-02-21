@@ -8,6 +8,10 @@
 		UserController::login();
 	});
 	
+	$routes->get('/logout', function(){
+		UserController::logout();
+	});
+
 	$routes->get('/user', function() {
 		UserController::index();
 	});
