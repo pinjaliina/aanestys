@@ -29,10 +29,10 @@
 			return $errors;
 		}
 		
-		private static function tbl() {
-			return DatabaseConfig::PREFIX .'poll_options';
+		private static function tbl($tblname = 'poll_options') {
+			return DatabaseConfig::PREFIX . $tblname;
 		}
-		
+
 		public static function findByPollId($polls_id){
 			$q = DB::connection()->prepare('SELECT * FROM '. self::tbl() .' WHERE polls_id = :polls_id');
 			$q->execute(array('polls_id' => $polls_id));

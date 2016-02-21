@@ -10,10 +10,10 @@
 			parent::__construct($attributes);
 		}
 		
-		private static function tbl() {
-			return DatabaseConfig::PREFIX .'votes';
+		private static function tbl($tblname = 'votes') {
+			return DatabaseConfig::PREFIX . $tblname;
 		}
-		
+
 		public static function findByPollId($polls_id){
 			$q = DB::connection()->prepare('SELECT * FROM '. self::tbl() .' WHERE polls_id = :polls_id');
 			$q->execute(array('polls_id' => $polls_id));
