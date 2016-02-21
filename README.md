@@ -9,12 +9,16 @@ Yleisiä linkkejä:
 
 Valitsemani aihe on [Äänestys](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Aanestys.html).
 
-* Tähän asti tehtyä (15.2.2016):
+* Tähän asti tehtyä (21.2.2016):
  * [Äänestysten listaussivu](http://pjalkane.users.cs.helsinki.fi/aanestys/poll).
-   * Koko sovelluksen [etusivu](http://pjalkane.users.cs.helsinki.fi/aanestys) on toistaiseksi niin ikään ohjattu tänne.
-    * Myös yksittäisen äänestyksen listaussivu toimii, mutta lisäys/muokkaus/poisto ovat vielä osittain kesken. Tämän mallin näkymien kautta kontrolloidaan myös äänestyksen vaihtoehtoja ja annettuja ääniä, joten niiden rakentaminen ei ole ihan yhtä yksinkertaista kuin käyttäjämallin osin dynaamisine lomakkeineen ja useamman tietokohteen malleihin viittaavine controllereineen.
- * [Käyttäjänhallinta](http://pjalkane.users.cs.helsinki.fi/aanestys/user). Koko ns. CRUD-nelikko periaatteessa toimii, ~~mutta mitään käyttöoikeuksien tarkistusta tai syötteiden validointia ei vielä ole toteutettu~~ syötteiden validointi on toteutettu, ja pääsy tarkistetaan sillä tasolla, että muut näkymät kirjautumista lukuunottamatta on suljettu anonyymeilta käyttäjiltä, mutta mitään auktorisointia ei vielä tarkisteta, eli kaikilla käyttäjillä on samat oikeudet.
+   * Koko sovelluksen [etusivu](http://pjalkane.users.cs.helsinki.fi/aanestys) on toistaiseksi niin ikään ohjattu tänne. Lopullinen etusivu tulee olemaan ns. oma versio yksittäisen käyttäjän tarkastelusivusta, kunhan käyttöoikeuksien tarkistuksesta saadaan toteutettua autentikoinnin lisäksi myös auktorisointi.
+ * Äänestysten ja niiden vaihtoehtojen tarkastelu/lisäys/muokkaus/poisto.
+ * Käyttäjien lisääminen äänestyksiin ja poistaminen niistä.
+ * [Käyttäjänhallinta](http://pjalkane.users.cs.helsinki.fi/aanestys/user). Pääsy kuitenkin tarkistetaan vielä toistaiseksi vain sillä tasolla, että muut näkymät kirjautumista lukuunottamatta on suljettu anonyymeilta käyttäjiltä. Mitään auktorisointitarkistuksia ei siis vielä tehdä, eli kaikilla käyttäjillä on yhtäläiset oikeudet.
    * Kirjautumista voi yrittää käyttäjätunnuksella ```pinjaliina``` ja salasanalla ```TOP SECRET```.
+
+* Tekemättä (21.2.2016) on vielä erityisesti äänestyssivu, jolla itse äänestäminen tapahtuu, sekä äänioikeuden merkkaaminen käytetyksi.
+* Joitakin muita puutteita on listattuna [tämän repon tiketeissä](https://github.com/pinjaliina/aanestys/issues). Siellä ei kuitenkaan ole listattuna vielä toteuttamattomia suuria kokonaisuuksia, vaan lähinnä pikkuasioita, joihin olisi hyvä palata myöhemmin.
 
 * Demosivuja:
  * [kirjautumissivun demo](http://pjalkane.users.cs.helsinki.fi/aanestys/login)
@@ -27,3 +31,4 @@ Valitsemani aihe on [Äänestys](http://advancedkittenry.github.io/suunnittelu_j
  * [lomakkeet](http://getbootstrap.com/css/#forms)
  * [painikkeet](http://getbootstrap.com/css/#buttons)
 
+* Tämä ohjelmisto on lisensoitu [MIT-lisenssillä](https://github.com/pinjaliina/aanestys/LICENSE.txt).
