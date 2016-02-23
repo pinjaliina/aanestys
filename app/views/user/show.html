@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
+	{% if user_logged_in.id == user.id %}
+	<h1>Omat tiedot</h1>
+	{% else %}
 	<h1>Käyttäjän tiedot</h1>
+	{% endif %}
 
 	{% if message %}
 		<div class="alert alert-success">
@@ -37,8 +41,8 @@
 	</div>
 	
 	<div class="ctrl_btns">
-		<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/edit">Muokkaa tietoja</a>
-		<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/delete">Poista käyttäjä</a>
+		<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/edit">Muokkaa {% if user_logged_in.id == user.id %}omia{% endif %} tietoja</a>
+		{% if not user_logged_in.id == user.id and user_logged_in.admin %}<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/delete">Poista käyttäjä</a>{% endif %}
 	</div>
 
 	<h2>Äänestykset</h2>
@@ -61,26 +65,28 @@
 							<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.start_time}}</a></td>
 							<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.end_time}}</a></td>
 							<td>{% if poll.voted %}Kyllä{% else %}Ei{% endif %}</td>
-							<td class="action"><a href="{{base_path}}/poll/{{poll.id}}/{{user.id}}/removeuser">Poista käyttäjä äänestyksestä</a></td>
+							<td class="action">{% if user_logged_in.admin %}<a href="{{base_path}}/poll/{{poll.id}}/{{user.id}}/removeuser">Poista käyttäjä äänestyksestä</a>{% endif %}</td>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 		{% endif %}
-		<div class="box_basic_inner">
-		{% if nonpolls %}
-			<form method="post" action="{{base_path}}/poll/adduser/{{user.id}}" id="user_add_to_poll_form">
-				<select id="user_add_to_poll_list" name="poll">
-					{% for nonpoll in nonpolls %}
-						<option value="{{nonpoll.id}}">{{nonpoll.name}}</option>
-					{% endfor %}
-				</select>
-				<input type="submit" id="user_add_to_poll_submit" name="submit" value="Lisää käyttäjä äänestykseen" />
-			</form>
-		{% else %}
-			<p>Käyttäjä kuluu kaikkiin järjestelmään tallennettuihin äänestyksiin.</p>
+		{% if user_logged_in.admin %}
+			<div class="box_basic_inner">
+			{% if nonpolls %}
+				<form method="post" action="{{base_path}}/poll/adduser/{{user.id}}" id="user_add_to_poll_form">
+					<select id="user_add_to_poll_list" name="poll">
+						{% for nonpoll in nonpolls %}
+							<option value="{{nonpoll.id}}">{{nonpoll.name}}</option>
+						{% endfor %}
+					</select>
+					<input type="submit" id="user_add_to_poll_submit" name="submit" value="Lisää käyttäjä äänestykseen" />
+				</form>
+			{% else %}
+				<p>Käyttäjä kuluu kaikkiin järjestelmään tallennettuihin äänestyksiin.</p>
+			{% endif %}
+			</div>
 		{% endif %}
-		</div>
 	</div>
 		
 {% endblock %}
