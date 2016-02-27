@@ -86,6 +86,10 @@
 		PollController::removeUser($id, $uid);
 	});
 
+	$routes->get('/poll/:id/:uid/vote', function($id, $uid){
+		PollController::vote($id, $uid);
+	});
+
   $routes->get('/helloworld', function() {
     HelloWorldController::index();
   });

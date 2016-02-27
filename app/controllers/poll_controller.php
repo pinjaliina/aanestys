@@ -250,4 +250,24 @@
 			Redirect::to('/user/'. $users_id, array('message' => 'Käyttäjä '. $user->login .' poistettiin onnistuneesti äänestyksestä '. $poll->name .'.'));
 		}
 		
+		public static function vote($polls_id, $users_id){
+			self::check_logged_in();
+			$user = User::findByPK($users_id);
+			$poll = Poll::findByPK($polls_id);
+			$polloptions = PollOption::findByPollId($poll->id);
+			$curruser = self::get_user_logged_in();
+			if(!($curruser->id == $user->id)) {
+				Redirect::to('/user/'. $curruser->id, array('error' => 'Virheellinen pyyntö!'));			
+			}
+			$status = Poll::checkVoteStatus($user->id, $poll->id);
+			if($status === NULL) {
+				Redirect::to('/user/'. $curruser->id, array('error' => 'Sinulla ei ole äänioikeutta pyytämääsi äänestykseen!'));							
+			}
+			elseif($status === TRUE){
+				Redirect::to('/user/'. $curruser->id, array('error' => 'Olet jo käyttänyt äänioikeutesi äänestyksessä '. $poll->name .'!'));											
+			}
+			else {
+				View::make('poll/vote.html', array('user' => $user, 'poll' => $poll, 'polloptions' => $polloptions));
+			}
+		}
 	}

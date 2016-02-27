@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+	{% if poll and polloptions and user %}
+		<h1>Äänestys: <em>{{poll.name}}</em></h1>
+		
+		<p class="poll_vote_description">{{poll.description}}</p>
+
+		<p class="poll_vote_info">Äänestys alkaa {{poll.start_time}} ja päättyy {{poll.end_time}}.</p>
+	
+		{% if errors %}
+			<div class="alert alert-danger">
+				<ul>
+					{% for error in errors %}
+						<li>{{error}}</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}	
+
+		<div class="box_basic" id="poll_vote">
+			<form method="post" action="{{base_path}}/poll/{{poll.id}}/{{user.id}}/vote" id="poll_vote_form">
+				<input type="hidden" name="poll_id" value="{{poll.id}}" />
+				<input type="hidden" name="user_id" value="{{user.id}}" />
+				<table class="table-striped">
+					<tr>
+						<th colspan="2">Vaihtoehto</th>
+						<th>Kuvaus</th>
+					</tr>
+					{% for option in polloptions %}
+						<tr>
+							<td>
+								<input type="radio" name="choice" value="{{option.id}}" />
+							</td>
+							<td class="poll_vote_option">{{option.name}}</td>
+							<td>{{option.description}}</td>
+						</tr>
+					{% endfor %}
+				</table>
+				<div class="box_basic_inner">
+					<input type="checkbox" id="poll_vote_accept" name="accept" />
+					<label for="poll_vote_accept">Ymmärrän, että voin äänestää vain kerran. Olen varma päätöksestäni!</label>
+					<input class="btn btn-danger" type="submit" id="poll_vote_submit" name="submit" value="Äänestä!" />
+				</div>
+			</form>
+		</div>
+
+	{% else %}
+		<div class="alert alert-danger">
+			<p>Virhe! Ota yhteys äänestyksen järjestäjään.</p>
+		</div>	
+	{% endif %}
+	
+{% endblock %}

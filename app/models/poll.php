@@ -181,16 +181,18 @@
 			$q->execute(array($this->id, $users_id));			
 		}
 					
-		private static function checkVoteStatus($users_id, $polls_id){
+		public static function checkVoteStatus($users_id, $polls_id){
 			$sql = 'SELECT voted FROM '. self::tbl('users_polls') .' WHERE users_id = :users_id AND polls_id = :polls_id';
 			$q = DB::connection()->prepare($sql);
 			$q->execute(array('users_id' => $users_id, 'polls_id' => $polls_id));
 			$r = $q->fetch();
 			if($r) {
-				return $r['voted'];
+				return $r['voted']; //This returns TRUE or FALSE.
 			}
+			// If $users_id has no right to vote in this poll at all, return NULL--not
+			// FALSE--and keep this function public. This is useful in the controller.
 			else {
-				return FALSE;
+				return NULL;
 			}
 		}
 
