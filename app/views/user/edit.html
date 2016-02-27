@@ -28,13 +28,15 @@
 				<input type="hidden" name="id" value="{{user.id}}" />
 			{% endif %}
 			<label for="user_edit_login">Käyttäjätunnus:</label>
-			<input type="text" id="user_edit_login" name="login" maxlength="15" value="{% if user %}{{user.login}}{% endif %}" /><br/>
+			<input type="text" id="user_edit_login" name="login" maxlength="15" value="{% if user %}{{user.login}}{% endif %}" {% if not user_logged_in.admin %} disabled="disabled"{% endif %} /><br/>
 			<label for="user_edit_password">Salasana:</label>
 			<input type="password" id="user_edit_password" name="password" maxlength="20" value="{% if user %}{{user.password}}{% endif %}" /><br/>
 			<label for="user_edit_confirm">Vahvista salasana:</label>
 			<input type="password" id="user_edit_confirm" name="confirm" maxlength="20" value="{% if user and user.id and not errors %}{{user.password}}{% endif %}" /><br/>
-			<label for="user_edit_admin">Ylläpito-oikeus:</label>
-			<input type="checkbox" id="user_edit_admin" name="admin" {% if user and user.admin %}checked="checked"{% endif %} /><br/>
+			{% if user_logged_in.admin %}
+				<label for="user_edit_admin">Ylläpito-oikeus:</label>
+				<input type="checkbox" id="user_edit_admin" name="admin" {% if user and user.admin %}checked="checked"{% endif %}{% if user_logged_in.id == user.id %} disabled="disabled"{% endif %} /><br/>
+			{% endif %}
 			<label for="user_edit_name">Koko nimi:</label>
 			<input type="text" id="user_edit_name" name="name" maxlength="40" value="{% if user %}{{user.name}}{% endif %}" /><br/>
 			<label for="user_edit_email">Sähköpostiosoite:</label>
