@@ -8,29 +8,49 @@
 
 		public static function index(){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 			$polls = Poll::findAll();
 			View::make('poll/index.html', array('polls' => $polls));
 		}
 		
 		public static function show($id){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 			$poll = array('poll' => Poll::findByPK($id), 'polloptions' => PollOption::findByPollId($id));
 			View::make('poll/show.html', $poll);
 		}
 
 		public static function create(){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 			View::make('poll/edit.html');
 		}
 
 		public static function edit($id){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 			$poll = array('poll' => Poll::findByPK($id), 'polloptions' => PollOption::findByPollId($id));
 			View::make('poll/edit.html', $poll);
 		}
 		
 		public static function save(){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 			$p = $_POST;
 			
 			$poll = new Poll(array(
@@ -99,6 +119,10 @@
 		
 		public static function update(){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 			$p = $_POST;
 			
 			$poll = new Poll(array(
@@ -185,6 +209,10 @@
 		
 		public static function delete($id){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 			$poll = new Poll(array(
 				'id' => $id	
 			));
@@ -195,6 +223,10 @@
 		
 		public static function addUser($users_id){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 			
 			$p = $_POST;
 
@@ -207,6 +239,10 @@
 
 		public static function removeUser($polls_id, $users_id){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 			$poll = Poll::findByPK($polls_id);
 			$user = User::findByPK($users_id);
 			
