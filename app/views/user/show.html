@@ -67,9 +67,15 @@
 				<tbody>
 					{% for poll in polls %}
 						<tr>
-							<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.name}}</a></td>
-							<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.start_time}}</a></td>
-							<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.end_time}}</a></td>
+							{% if user_logged_in.admin %}
+								<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.name}}</a></td>
+								<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.start_time}}</a></td>
+								<td><a href="{{base_path}}/poll/{{poll.id}}">{{poll.end_time}}</a></td>
+							{% else %}
+								<td>{{poll.name}}</td>
+								<td>{{poll.start_time}}</td>
+								<td>{{poll.end_time}}</td>
+							{% endif %}
 							<td>{% if poll.voted %}Kyllä{% else %}Ei{% endif %}</td>
 							<td class="action">{% if user_logged_in.admin %}<a href="{{base_path}}/poll/{{poll.id}}/{{user.id}}/removeuser">Poista käyttäjä äänestyksestä</a>{% endif %}</td>
 						</tr>
