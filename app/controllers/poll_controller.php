@@ -22,7 +22,10 @@
 			if(!$curruser->admin) {
 				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
 			}
-			$poll = array('poll' => Poll::findByPK($id), 'polloptions' => PollOption::findByPollId($id));
+			$thispoll = Poll::findByPK($id);
+			$results = $thispoll->getResults();
+			Kint::dump($results);
+			$poll = array('poll' => $thispoll, 'polloptions' => PollOption::findByPollId($id));
 			View::make('poll/show.html', $poll);
 		}
 

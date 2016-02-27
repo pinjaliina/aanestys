@@ -195,5 +195,51 @@
 				return NULL;
 			}
 		}
+			
+		private function getEligibleVotersCount(){
+			$sql = 'SELECT COUNT(*) FROM '. self::tbl('users_polls') .' WHERE polls_id = :polls_id';
+			$q = DB::connection()->prepare($sql);
+			$q->execute(array('polls_id' => $this->id));
+			$r = $q->fetch();
+			if($r) {
+				return $r['count'];
+			}
+			else {
+				return 0;
+			}
+		}
+		
+		private static function cmpVoteCount($a, $b){
+			return $b['vote_count'] - $a['vote_count'];
+		}
+
+		// Find all the results in a poll and build and associative array out of them;
+		public function getResults() {
+ 			$r = array(
+				'id' => $this->id,
+				'name' => $this->name,
+				'eligible_count' => $this->getEligibleVotersCount(),
+				'vote_count' => 0,
+				'turnout' => 0.0,
+				'options' => array()
+			);
+			$options = PollOption::findByPollId($this->id);
+			foreach($options as $option) {
+				$r['options'][$option->id] = array(
+					'id' => $option->id,
+					'name' => $option->name,
+					'vote_count' => 0
+				);
+				$votes = Vote::findByPollIdAndOptionId($this->id, $option->id);
+				foreach($votes as $vote) {
+					++$r['vote_count'];				
+					++$r['options'][$option->id]['vote_count'];				
+				}
+			}
+			$r['turnout'] = ($r['vote_count']/$r['eligible_count'])*100;
+			uasort($r['options'], "self::cmpVoteCount");
+			
+			return $r;
+		}
 
 	}
