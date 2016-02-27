@@ -30,7 +30,7 @@
 					{% for option in polloptions %}
 						<tr>
 							<td>
-								<input type="radio" name="choice" value="{{option.id}}" />
+								<input type="radio" name="choice" value="{{option.id}}" {% if option.chosen %} checked="checked"{% endif %} />
 							</td>
 							<td class="poll_vote_option">{{option.name}}</td>
 							<td>{{option.description}}</td>
@@ -39,7 +39,7 @@
 				</table>
 				<div class="box_basic_inner">
 					<input type="checkbox" id="poll_vote_accept" name="accept" />
-					<label for="poll_vote_accept">Ymmärrän, että voin äänestää vain kerran. Olen varma päätöksestäni!</label>
+					<label for="poll_vote_accept">Ymmärrän, että voin äänestää vain kerran. Hyväksyn sen ja olen varma päätöksestäni!</label>
 					<input class="btn btn-danger" type="submit" id="poll_vote_submit" name="submit" value="Äänestä!" />
 				</div>
 			</form>

@@ -90,6 +90,10 @@
 		PollController::vote($id, $uid);
 	});
 
+	$routes->post('/poll/:id/:uid/vote', function($id, $uid){
+		PollController::saveVote($id, $uid);
+	});
+
   $routes->get('/helloworld', function() {
     HelloWorldController::index();
   });

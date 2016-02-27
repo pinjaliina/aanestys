@@ -2,8 +2,8 @@
 
   class Vote extends BaseModel{
 		
-		//Attributes
-		public $id, $polls_id, $poll_options_id, $time;
+		//Attributes. $users_id is a temporary attribute and not in the DB schema for this model.
+		public $id, $polls_id, $poll_options_id, $time, $users_id;
 		
 		//Constructor
 		public function __construct($attributes){
@@ -69,11 +69,17 @@
 		}
 		
 		public function save(){
-			$q = DB::connection()->prepare('INSERT INTO '. self::tbl() .' (polls_id, poll_options_id, time) VALUES (:polls_id, :poll_options_id, :time) RETURNING id');
-			$q->execute(array($this->polls_id, $this->poll_options_id, $this->time));
-			$row = $q->fetch();
-			if($row['id']){
-				$this->id = $row['id'];
+			if($this->users_id) {				
+				$q = DB::connection()->prepare('INSERT INTO '. self::tbl() .' (polls_id, poll_options_id, time) VALUES (:polls_id, :poll_options_id, :time) RETURNING id');
+				$q->execute(array($this->polls_id, $this->poll_options_id, $this->time));
+				$row = $q->fetch();
+				if($row['id']){
+					$this->id = $row['id'];
+				}
+				// Upon saving the vote expire the users permission to vote in this poll.
+				// NOTE: the vote itself can't be connected to the user past this point.
+				$q2 = DB::connection()->prepare('UPDATE '. self::tbl('users_polls') .' SET voted=TRUE WHERE voted=FALSE AND users_id=:users_id AND polls_id=:polls_id');
+				$q2->execute(array('users_id' => $this->users_id, 'polls_id' => $this->polls_id));
 			}
 		}
 		

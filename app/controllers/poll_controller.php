@@ -270,4 +270,48 @@
 				View::make('poll/vote.html', array('user' => $user, 'poll' => $poll, 'polloptions' => $polloptions));
 			}
 		}
+
+		public static function saveVote(){
+			self::check_logged_in();
+			
+			$p = $_POST;
+			
+			$user = User::findByPK($p['user_id']);
+			$poll = Poll::findByPK($p['poll_id']);
+			$polloptions = PollOption::findByPollId($poll->id);
+			$curruser = self::get_user_logged_in();
+			if(!($curruser->id == $user->id)){
+				Redirect::to('/user/'. $curruser->id, array('error' => 'Virheellinen pyyntö!'));			
+			}
+			$status = Poll::checkVoteStatus($user->id, $poll->id);
+			if($status === NULL){
+				Redirect::to('/user/'. $curruser->id, array('error' => 'Sinulla ei ole äänioikeutta pyytämääsi äänestykseen!'));							
+			}
+			elseif($status === TRUE){
+				Redirect::to('/user/'. $curruser->id, array('error' => 'Olet jo käyttänyt äänioikeutesi äänestyksessä '. $poll->name .'!'));											
+			}
+			$errors = array();
+			if(!isset($_POST['choice'])) {
+				$errors[] = 'Et valinnut yhtään vaihtoehtoa. Valitse vaihtoehto äänestääksesi!';
+			}
+			else {
+				$polloptions[$p['choice']]->chosen = TRUE;
+			}
+			if(!isset($_POST['accept'])) {
+				$errors[] = 'Et ilmaissut hyväksyväsi äänioikeutesi ainutkertaisuuttä. Et voi äänestää hyväksymättä sitä.';
+			}
+			if(!empty($errors)) {
+				View::make('poll/vote.html', array('user' => $user, 'poll' => $poll, 'polloptions' => $polloptions, 'errors' => $errors));
+			}
+			else{
+				$vote = new Vote(array(
+					'users_id' => $user->id,
+					'polls_id' => $poll->id,
+					'poll_options_id' => $polloptions[$p['choice']]->id,
+					'time' => date('c')
+				));
+				$vote->save();
+				Redirect::to('/user/'. $curruser->id, array('message' => 'Äänesi äänestyksessä '. $poll->name .' on tallennettu! Antamaasi ääntä ei voida yhdistää sinuun myöhemmin.'));
+			}
+		}		
 	}

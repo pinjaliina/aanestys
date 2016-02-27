@@ -2,8 +2,8 @@
 
   class PollOption extends BaseModel{
 		
-		//Attributes
-		public $id, $polls_id, $name, $description;
+		//Attributes. $chosen is a temporary attribute and not in the DB schema.
+		public $id, $polls_id, $name, $description, $chosen;
 		
 		//Constructor
 		public function __construct($attributes){
@@ -40,7 +40,7 @@
 			
 			$polloptions = array();
 			foreach($rows as $r) {
-				$polloptions[] = new PollOption(array(
+				$polloptions[$r['id']] = new PollOption(array(
 						'id' => $r['id'],
 						'polls_id' => $r['polls_id'],
 						'name' => $r['name'],
