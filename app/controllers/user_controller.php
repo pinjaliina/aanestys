@@ -23,11 +23,6 @@
 			$user = User::findByPK($id);
 			$polls = Poll::findByUser($id);
 			$nonpolls = Poll::findbyUserNeg($id);
-			// FIXME: This is totally unnecessary. Poll::findByUser should be able
-			//        to return this information directly!
-			foreach ($polls as $poll){
-				$poll->checkVoteStatus($id);
-			}
 			$objects = array(
 				'user' => $user,
 				'polls' => $polls,

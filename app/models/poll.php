@@ -124,7 +124,8 @@
 						'name' => $r['name'],
 						'description' => $r['description'],
 						'start_time' => self::fmtTime($r['start_time']),
-						'end_time' => self::fmtTime($r['end_time'])
+						'end_time' => self::fmtTime($r['end_time']),
+						'voted' => self::checkVoteStatus($users_id, $r['id'])
 				));
 			}
 			
@@ -180,13 +181,16 @@
 			$q->execute(array($this->id, $users_id));			
 		}
 					
-		public function checkVoteStatus($users_id){
+		private static function checkVoteStatus($users_id, $polls_id){
 			$sql = 'SELECT voted FROM '. self::tbl('users_polls') .' WHERE users_id = :users_id AND polls_id = :polls_id';
 			$q = DB::connection()->prepare($sql);
-			$q->execute(array('users_id' => $users_id, 'polls_id' => $this->id));
+			$q->execute(array('users_id' => $users_id, 'polls_id' => $polls_id));
 			$r = $q->fetch();
 			if($r) {
-				$this->voted = $r['voted'];
+				return $r['voted'];
+			}
+			else {
+				return FALSE;
 			}
 		}
 
