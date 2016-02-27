@@ -21,6 +21,10 @@
 		public static function show($id){
 			self::check_logged_in();
 			$user = User::findByPK($id);
+			$curruser = self::get_user_logged_in();
+			if(!($curruser->id == $user->id) || $curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));
+			}
 			$polls = Poll::findByUser($id);
 			$nonpolls = Poll::findbyUserNeg($id);
 			$objects = array(
