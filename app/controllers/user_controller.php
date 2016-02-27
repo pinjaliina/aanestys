@@ -8,8 +8,14 @@
 
 		public static function index(){
 			self::check_logged_in();
-			$users = User::findAll();
-			View::make('user/index.html', array('users' => $users));
+			$user = self::get_user_logged_in();
+			if($user->admin) {
+				$users = User::findAll();
+				View::make('user/index.html', array('users' => $users));
+			}
+			else {
+				Redirect::to('/user/'. $user->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 		}
 		
 		public static function show($id){
@@ -32,7 +38,13 @@
 
 		public static function create(){
 			self::check_logged_in();
-			View::make('user/edit.html');
+			$user = self::get_user_logged_in();
+			if($user->admin) {
+				View::make('user/edit.html');
+			}
+			else {
+				Redirect::to('/user/'. $user->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
 		}
 
 		public static function edit($id){
@@ -109,6 +121,13 @@
 		
 		public static function delete($id){
 			self::check_logged_in();
+			$curruser = self::get_user_logged_in();
+			if(!$curruser->admin) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Pääsy kielletty ilman ylläpito-oikeutta!'));			
+			}
+			else if($curruser->id == $id) {
+				Redirect::to('/user/'. $curruser->id, array('warning' => 'Et voi poistaa omaa käyttäjätunnustasi!'));							
+			}
 			$user = new User(array(
 				'id' => $id	
 			));

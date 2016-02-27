@@ -35,7 +35,7 @@
 						<td><a href="{{base_path}}/user/{{user.id}}">{{user.name}}</a></td>
 						<td><a href="{{base_path}}/user/{{user.id}}">{{user.email}}</a></td>
 						<td class="action"><a href="{{base_path}}/user/{{user.id}}/edit">Muokkaa</a></td>
-						<td class="action"><a href="{{base_path}}/user/{{user.id}}/delete">Poista</a></td>
+						<td class="action">{% if not (user_logged_in.id == user.id) %}<a href="{{base_path}}/user/{{user.id}}/delete">Poista</a>{% endif %}</td>
 					</tr>
 				{% endfor %}
 			</tbody>

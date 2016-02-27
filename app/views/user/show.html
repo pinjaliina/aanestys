@@ -13,6 +13,12 @@
 		</div>
 	{% endif %}
 	
+	{% if warning %}
+		<div class="alert alert-warning">
+		{{warning}}
+		</div>
+	{% endif %}
+
 	<h2>Perustiedot</h2>
 	
 	<div class="box_basic" id="user_show">
@@ -42,7 +48,7 @@
 	
 	<div class="ctrl_btns">
 		<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/edit">Muokkaa {% if user_logged_in.id == user.id %}omia{% endif %} tietoja</a>
-		{% if not user_logged_in.id == user.id and user_logged_in.admin %}<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/delete">Poista käyttäjä</a>{% endif %}
+		{% if not (user_logged_in.id == user.id) and user_logged_in.admin %}<a class="btn btn-default" href="{{base_path}}/user/{{user.id}}/delete">Poista käyttäjä</a>{% endif %}
 	</div>
 
 	<h2>Äänestykset</h2>

@@ -1,7 +1,9 @@
 <?php
 
   $routes->get('/', function() {
-    PollController::index();
+		UserController::check_logged_in();
+		$id = UserController::get_user_logged_in()->id;
+    UserController::show($id);
   });
 	
 	$routes->get('/login', function() {
