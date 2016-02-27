@@ -84,7 +84,8 @@
 								<td>{{poll.end_time}}</td>
 							{% endif %}
 							<td>{% if poll.voted %}Kyllä{% else %}Ei{% endif %}</td>
-							<td class="action">{% if not poll.voted and (user_logged_in.id == user.id) %}<a class="btn btn-danger" href="{{base_path}}/poll/{{poll.id}}/{{user.id}}/vote"><strong>Äänestä</strong></a>{% endif %}</td>
+							<td class="action">{% if not poll.voted and (user_logged_in.id == user.id) and (poll.start_time|date('Y-m-d') <= "now"|date('Y-m-d')) and (poll.end_time|date('Y-m-d') >= "now"|date('Y-m-d')) %}<a class="btn btn-danger" href="{{base_path}}/poll/{{poll.id}}/{{user.id}}/vote"><strong>Äänestä</strong></a>{% endif %}
+							</td>
 							<td class="action">{% if user_logged_in.admin %}<a href="{{base_path}}/poll/{{poll.id}}/{{user.id}}/removeuser">Poista käyttäjä äänestyksestä</a>{% endif %}</td>
 						</tr>
 					{% endfor %}

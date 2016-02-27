@@ -267,7 +267,18 @@
 				Redirect::to('/user/'. $curruser->id, array('error' => 'Olet jo käyttänyt äänioikeutesi äänestyksessä '. $poll->name .'!'));											
 			}
 			else {
-				View::make('poll/vote.html', array('user' => $user, 'poll' => $poll, 'polloptions' => $polloptions));
+				// Check if the poll is open but don't actually prevent users from
+				// accessing the poll; just warn them that they can't currently vote.
+				$errors = array();
+				$poll_start = new DateTime($poll->start_time);
+				$poll_end = new DateTime($poll->end_time);
+				if($poll_start->getTimeStamp() >= time()) {
+					$errors[] = 'Äänestys ei ole vielä alkanut!';
+				}
+				if($poll_end->getTimeStamp() <= time()) {
+					$errors[] = 'Äänestys on päättynyt – et voi enää äänestää!';
+				}
+				View::make('poll/vote.html', array('user' => $user, 'poll' => $poll, 'polloptions' => $polloptions, 'errors' => $errors));
 			}
 		}
 
@@ -291,6 +302,14 @@
 				Redirect::to('/user/'. $curruser->id, array('error' => 'Olet jo käyttänyt äänioikeutesi äänestyksessä '. $poll->name .'!'));											
 			}
 			$errors = array();
+			$poll_start = new DateTime($poll->start_time);
+			$poll_end = new DateTime($poll->end_time);
+			if($poll_start->getTimeStamp() >= time()) {
+				$errors[] = 'Äänestys ei ole vielä alkanut!';
+			}
+			if($poll_end->getTimeStamp() <= time()) {
+				$errors[] = 'Äänestys on päättynyt – et voi enää äänestää!';
+			}
 			if(!isset($_POST['choice'])) {
 				$errors[] = 'Et valinnut yhtään vaihtoehtoa. Valitse vaihtoehto äänestääksesi!';
 			}
