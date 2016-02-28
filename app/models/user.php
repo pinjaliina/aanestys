@@ -23,6 +23,10 @@
 			if(isset($nameErr)){
 				$errors[] = $nameErr;
 			}
+			$u2 = self::findByLoginName($this->login);
+			if(($this->id === NULL && $u2 !== NULL)	|| $u2 instanceof User && ($this->id !== $u2->id)) {
+				$errors[] = 'Käyttäjänimi '. $this->login .' on jo käytössä!';
+			}
 			return $errors;
 		}
 
