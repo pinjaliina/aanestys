@@ -15,24 +15,24 @@
 		}
 		
 		public function validate_login(){
-			// FIXME: We should check whether the login name already exists and add
-			// an error if it does to avoid the much uglier "violation of unique
-			// constraint" SQL error. Issue #4.
 			$errors = array();
-			$nameErr = $this->validateStrLen($this->login, 15, 3, 'Käyttäjätunnuksen');
+			$nameErr = $this->validateStrLen($this->login, 15, 3, 'Käyttäjätunnuksen', FALSE);
 			if(isset($nameErr)){
 				$errors[] = $nameErr;
 			}
+			if(preg_match("/^[[:alnum:]]+$/", $this->login) !== 1) {
+				$errors[] = 'Käyttäjätunnus ei saa sisältää muita merkkejä kuin isoja ja pieniä kirjaimia väliltä A–Z sekä numeroita väliltä 0–9.';
+			}
 			$u2 = self::findByLoginName($this->login);
 			if(($this->id === NULL && $u2 !== NULL)	|| $u2 instanceof User && ($this->id !== $u2->id)) {
-				$errors[] = 'Käyttäjänimi '. $this->login .' on jo käytössä!';
+				$errors[] = 'Käyttäjätunnus '. $this->login .' on jo käytössä!';
 			}
 			return $errors;
 		}
 
 		public function validate_password(){
 			$errors = array();
-			$nameErr = $this->validateStrLen($this->password, 20, 6, 'Salasanan');
+			$nameErr = $this->validateStrLen($this->password, 20, 6, 'Salasanan', FALSE);
 			if(isset($nameErr)){
 				$errors[] = $nameErr;
 			}
@@ -49,13 +49,13 @@
 		}
 		
 		public function validate_email(){
-			// FIXME: we could do some smart email address validation besides just
-			// checking for its length. But I'm in too much hurry to write that regex
-			// right now.
 			$errors = array();
-			$nameErr = $this->validateStrLen($this->email, 40, 5, 'Sähköpostiosoitteen');
+			$nameErr = $this->validateStrLen($this->email, 40, 5, 'Sähköpostiosoitteen', FALSE);
 			if(isset($nameErr)){
 				$errors[] = $nameErr;
+			}
+			if(filter_var($this->email, FILTER_VALIDATE_EMAIL) === FALSE) {
+				$errors[] = 'Syötetty sähköpostiosoite ei ole kelvollinen.';
 			}
 			return $errors;
 		}

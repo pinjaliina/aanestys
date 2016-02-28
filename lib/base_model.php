@@ -27,9 +27,20 @@
       return $errors;
     }
 		
-		public function validateStrLen($str, $maxlen, $minlen = 0, $name = 'Kentän') {
-			if($minlen > 0 && ($str == '' || $str == null || mb_strlen($str, 'UTF-8') < $minlen)) {
-				return "$name pituuden tulee olla vähintään $minlen merkkiä.";
+		public function validateStrLen($str, $maxlen, $minlen = 0, $name = 'Kentän', $warnspace = TRUE) {
+			$fail = FALSE;
+			if($warnspace) {
+				if($minlen > 0 && (trim($str) == '' || $str == NULL || trim(mb_strlen($str, 'UTF-8')) < $minlen)) {
+					$fail = TRUE;
+				}
+			}
+			else {
+				if($minlen > 0 && ($str == '' || $str == NULL || mb_strlen($str, 'UTF-8') < $minlen)) {
+					$fail = TRUE;
+				}
+			}
+			if($fail) {
+				return "$name pituuden tulee olla vähintään $minlen merkkiä.". ($warnspace === TRUE ? " Välilyöntejä alussa ja lopussa ei lasketa mukaan pituuteen." : "");
 			}
 			if(mb_strlen($str, 'UTF-8') > $maxlen) {
 				return "$name pituuden tulee olla korkeintaan $maxlen merkkiä.";
