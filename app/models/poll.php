@@ -235,8 +235,9 @@
 					++$r['vote_count'];				
 					++$r['options'][$option->id]['vote_count'];				
 				}
+				$r['options'][$option->id]['percentage'] = round(($r['options'][$option->id]['vote_count']/$r['eligible_count'])*100);
 			}
-			$r['turnout'] = ($r['vote_count']/$r['eligible_count'])*100;
+			$r['turnout'] = round(($r['vote_count']/$r['eligible_count'])*100);
 			uasort($r['options'], "self::cmpVoteCount");
 			
 			return $r;

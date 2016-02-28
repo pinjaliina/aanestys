@@ -41,6 +41,44 @@
 		<a class="btn btn-default" href="{{base_path}}/poll/{{poll.id}}/delete">Poista äänestys</a>
 	</div>
 	
-	<h1>Äänestyksen tulokset</h1>
+	<h1>Äänestyksen tilastot ja tulokset</h1>
+	
+	<h2>Tilastot</h2>
+	
+	<div class="box_basic" id="poll_statistics">
+		<table>
+			<tr>
+				<th>Äänioikeutettuja yhteensä</th>
+				<td>{{results.eligible_count}}</td>
+			</tr>
+			<tr>
+				<th>Annettuja ääniä yhteensä</th>
+				<td>{{results.vote_count}}</td>
+			</tr>
+			<tr>
+				<th>Äänestysprosentti</th>
+				<td>{{results.turnout}} %</td>
+			</tr>
+		</table>
+	</div>
 
+	<h2>Tulokset</h2>
+	
+	<div class="box_basic" id="poll_results">
+		<table>
+			<tr>
+				<th>Äänestyksen vaihtoehto</th>
+				<th>Annettuja ääniä</th>
+				<th>Osuus annetuista äänistä</th>
+			</tr>
+			{% for option in results.options %}
+				<tr>
+					<td>{{option.name}}</td>
+					<td>{{option.vote_count}}</td>
+					<td>{{option.percentage}} %</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+	
 {% endblock %}
